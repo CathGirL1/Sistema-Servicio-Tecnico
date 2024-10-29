@@ -1,21 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-
+// la grilla no deja mostrarla si las propiedades son privadas, la grilla es donde se mostrara la lista de clientes, tecicos, etc
 
 internal class BaseDeDatos
 {
-    static List<Cliente> listaClientes = new List<Cliente>();
-    static List<Tecnico> listaTecnicos = new List<Tecnico>();
+    public static List<Cliente> listaClientes = new List<Cliente>();
+    public List<Tecnico> listaTecnicos = new List<Tecnico>();
 
-    public static List<Cliente> GetListaClientes()
-    {
-        return listaClientes;
-    }
-
-    public static List<Tecnico> GetTecnicos()
-    {
-        return listaTecnicos;
-    }
+    
 
     public static void AgregarCliente(string pNombre, string pApellido, int pCi, string pDireccion, int pTelefono, string pEmail)
     {

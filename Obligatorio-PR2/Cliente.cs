@@ -1,9 +1,9 @@
 ﻿internal class Cliente : Persona
 {
 
-    private string direccion;
-    private int telefono;
-    private string email;
+    public string direccion;
+    public int telefono;
+    public string email;
     static int id;
     static int contadorIds = 0;
 

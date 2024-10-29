@@ -1,10 +1,16 @@
 ﻿<%@ Page Title="Home Page" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Default.aspx.cs" Inherits="Obligatorio_PR2._Default" %>
 
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
-
+    <asp:Menu ID="Menu1" runat="server"></asp:Menu>
     <main>
         <section class="row" aria-labelledby="aspnetTitle">
-            <h1 id="aspnetTitle">ASP.NET</h1>
+            <h1 id="aspnetTitle">ASP.NET </h1><asp:AdRotator ID="AdRotator1" runat="server" />
+                <asp:BulletedList ID="BulletedList1" runat="server"></asp:BulletedList>
+                <asp:AdRotator ID="AdRotator2" runat="server" />
+                <asp:AdRotator ID="AdRotator3" runat="server" />
+                <asp:BulletedList ID="BulletedList2" runat="server"></asp:BulletedList>
+                <asp:Button ID="Button1" runat="server" Text="Button" />
+               
             <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS, and JavaScript.</p>
             <p><a href="http://www.asp.net" class="btn btn-primary btn-md">Learn more &raquo;</a></p>
         </section>
