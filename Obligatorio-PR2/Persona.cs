@@ -1,8 +1,8 @@
 ﻿internal class Persona
 {
-    public string nombre;
-    public string apellido;
-    public int ci;
+    public string nombre { get; set; }
+    public string apellido { get; set; }
+    public int ci { get; set; }
 
     public Persona(string pNombre, string pApellido, int pCi)
     {

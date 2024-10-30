@@ -12,12 +12,12 @@ namespace Obligatorio_PR2
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            List<Cliente> listaClientes = new List<Cliente>();
-            listaClientes.Add(new Cliente("Matias", "Delgado", 123, "San Carlos", 123, "matiasdels@gmail.com"));
+            //List<Cliente> listaClientes = new List<Cliente>();
+            //listaClientes.Add(new Cliente("Matias", "Delgado", 123, "San Carlos", 123, "matiasdels@gmail.com"));
             if (!IsPostBack)
             {
                 //pagClientes.DataSource = BaseDeDatos.listaClientes;
-                pagClientes.DataSource = listaClientes;
+                pagClientes.DataSource = BaseDeDatos.listaClientes;  
                 pagClientes.DataBind();
                 listaClientesDrop.DataSource = BaseDeDatos.listaClientes; 
                 listaClientesDrop.DataTextField = "Nombre";
@@ -28,109 +28,67 @@ namespace Obligatorio_PR2
 
         protected void clickAgregarCliente(object sender, EventArgs e)
         {
+
             string nombreCliente;
             string apellidoCliente;
             string direccionCliente;
             string emailCliente;
-            string cedulaTextoCliente;
-            string telefonoTextoCliente; 
-            int cedulaCliente = 0;
-            int telefonoCliente = 0; 
-            
+            int cedulaCliente = 0; 
+            int telefonoCliente = 0;
 
+            
             while (true)
             {
-                
-                cedulaTextoCliente = txtCedulaCliente.Text;
-                 
-                                  
-                if (int.TryParse(cedulaTextoCliente, out cedulaCliente))
+                if (string.IsNullOrEmpty(txtCedulaCliente.Text))
                 {
-                    break;
-
-                }else if (string.IsNullOrEmpty(txtCedulaCliente.Text))
-                {
-                    mensajeError.Text = "debe agregar una cedula";
-                    mensajeError.Visible = true; 
+                    mensajeError.Text = "Debe agregar una cédula.";
+                    mensajeError.Visible = true;
+                    return;
                 }
-                
+
+                if (int.TryParse(txtCedulaCliente.Text, out cedulaCliente))
+                {
+                    break; 
+                }
+                else
+                {
+                    mensajeError.Text = "La cédula debe ser un número válido.";
+                    mensajeError.Visible = true;
+                    return;
+                }
             }
 
+            
             while (true)
             {
-
-                telefonoTextoCliente = txtTelefonoCliente.Text;
-
-
-                if (int.TryParse(telefonoTextoCliente, out telefonoCliente))
-                {
-                    break;
-
-                }
-                else if (string.IsNullOrEmpty(txtTelefonoCliente.Text))
+                if (string.IsNullOrEmpty(txtTelefonoCliente.Text))
                 {
                     mensajeError.Text = "Debe agregar un teléfono.";
                     mensajeError.Visible = true;
+                    return;
                 }
 
-            }
-
-            while (true)
-            {
-                apellidoCliente = txtApellidoCliente.Text;
-                if (string.IsNullOrEmpty(txtApellidoCliente.Text))
+                if (int.TryParse(txtTelefonoCliente.Text, out telefonoCliente))
                 {
-                    mensajeError.Text = "Debe agregar un apellido.";
-                    mensajeError.Visible = true;
-                    break; 
+                    break; // Salir del bucle si se convierte correctamente
                 }
-            }
-
-            while (true)
-            {
-                direccionCliente = txtDireccionCliente.Text;
-                if (string.IsNullOrEmpty(txtDireccionCliente.Text))
+                else
                 {
-                    mensajeError.Text = "Debe agregar una dirección.";
+                    mensajeError.Text = "El teléfono debe ser un número válido.";
                     mensajeError.Visible = true;
-                    break; 
+                    return;
                 }
             }
 
-
-            while (true)
-            {
-                nombreCliente = txtNombreCliente.Text;
-                if (string.IsNullOrEmpty(txtNombreCliente.Text))
-                {
-                    mensajeError.Text = "Debe agregar un nombre.";
-                    mensajeError.Visible = true;
-                    break;
-                }
-            }
-
-            while (true)
-            {
-                emailCliente = txtEmailCliente.Text;
-                if (string.IsNullOrEmpty(txtEmailCliente.Text))
-                {
-                    mensajeError.Text = "Debe agregar un email.";
-                    mensajeError.Visible = true;
-                    break;
-                }
-            }
-
-
-
+            
             while (true)
             {
                 nombreCliente = txtNombreCliente.Text.Trim();
-
                 if (string.IsNullOrEmpty(nombreCliente))
                 {
                     mensajeError.Text = "Debe agregar un nombre.";
                     mensajeError.Visible = true;
-                    break;
+                    return;
                 }
 
                 Regex regex = new Regex("^[a-zA-Z]+$");
@@ -138,31 +96,67 @@ namespace Obligatorio_PR2
                 {
                     mensajeError.Text = "El nombre solo puede contener letras sin espacios.";
                     mensajeError.Visible = true;
-                    break;
+                    return;
                 }
                 nombreCliente = char.ToUpper(nombreCliente[0]) + nombreCliente.Substring(1).ToLower();
-
+                break;
             }
 
-            pagClientes.DataSource = BaseDeDatos.listaClientes;
-            pagClientes.DataBind();
+            
+            apellidoCliente = txtApellidoCliente.Text.Trim();
+            if (string.IsNullOrEmpty(apellidoCliente))
+            {
+                mensajeError.Text = "Debe agregar un apellido.";
+                mensajeError.Visible = true;
+                return;
+            }
 
-            listaClientesDrop.DataSource = BaseDeDatos.listaClientes;
-            listaClientesDrop.DataTextField = "Nombre";
-            listaClientesDrop.DataBind();
+            direccionCliente = txtDireccionCliente.Text.Trim();
+            if (string.IsNullOrEmpty(direccionCliente))
+            {
+                mensajeError.Text = "Debe agregar una dirección.";
+                mensajeError.Visible = true;
+                return;
+            }
 
+            emailCliente = txtEmailCliente.Text.Trim();
+            if (string.IsNullOrEmpty(emailCliente))
+            {
+                mensajeError.Text = "Debe agregar un email.";
+                mensajeError.Visible = true;
+                return;
+            }
+
+            
+            BaseDeDatos.AgregarCliente(nombreCliente, apellidoCliente, cedulaCliente, direccionCliente, telefonoCliente, emailCliente);
+
+           
+            ActualizarListas();
+
+          
             txtNombreCliente.Text = "";
             txtApellidoCliente.Text = "";
             txtCedulaCliente.Text = "";
             txtDireccionCliente.Text = "";
             txtTelefonoCliente.Text = "";
             txtEmailCliente.Text = "";
-
-
-            BaseDeDatos.AgregarCliente(nombreCliente, apellidoCliente, cedulaCliente, direccionCliente, telefonoCliente, emailCliente);
             
 
+
         }
+
+
+        public void ActualizarListas()
+        {
+            pagClientes.DataSource = BaseDeDatos.listaClientes;
+            pagClientes.DataBind();
+
+            listaClientesDrop.DataSource = BaseDeDatos.listaClientes;
+            listaClientesDrop.DataTextField = "Nombre";
+            listaClientesDrop.DataBind();
+        }
+
+
     }
 
    

@@ -4,8 +4,8 @@ using System.Collections.Generic;
 
 internal class BaseDeDatos
 {
-    public static List<Cliente> listaClientes = new List<Cliente>();
-    public List<Tecnico> listaTecnicos = new List<Tecnico>();
+    public static List<Cliente> listaClientes = new List<Cliente>(); 
+    public static List<Tecnico> listaTecnicos = new List<Tecnico>();
 
     
 

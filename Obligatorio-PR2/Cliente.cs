@@ -1,10 +1,11 @@
 ﻿internal class Cliente : Persona
 {
 
-    public string direccion;
-    public int telefono;
-    public string email;
-    static int id;
+    public string direccion { get; set; }
+    public int telefono { get; set; }
+    public string email { get; set; }
+    static int id { get; set; }
+
     static int contadorIds = 0;
 
     public Cliente(string pNombre, string pApellido, int pCi, string pDireccion, int pTelefono, string pEmail) : base(pNombre, pApellido, pCi)

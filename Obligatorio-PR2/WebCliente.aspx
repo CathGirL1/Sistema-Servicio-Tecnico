@@ -42,16 +42,14 @@
     <asp:Button ID="clickAgrCliente" runat="server" Text="Creación de Cliente" OnClick="clickAgregarCliente" />
 
 
-<%--    <asp:ListView runat="server" ID="pagClientes">
-    <ItemTemplate>
-        <label><%# Bind("nombre") %></label>
-    </ItemTemplate>
-    </asp:ListView>--%>
-    <asp:ListView runat="server" ID="ListView1">
+    <asp:GridView runat="server" ID="pagClientes">
+    </asp:GridView>
+
+    <%--<asp:ListView runat="server" ID="pagClientes">
     <ItemTemplate>
         <asp:Label ID="lblNombre" runat="server" Text='<%# Bind("nombre") %>'></asp:Label>
     </ItemTemplate>
-    </asp:ListView>
+    </asp:ListView>--%>
 
 
     <asp:Label ID="mensajeError" runat="server" Visible="false" ForeColor="Red"></asp:Label>

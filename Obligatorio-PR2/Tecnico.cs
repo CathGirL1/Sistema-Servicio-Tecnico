@@ -2,8 +2,8 @@
 
 internal class Tecnico : Persona
 {
-    private string especialidad;
-    static int id;
+    private string especialidad { get; set; }
+    static int id { get; set;}
     static int contadorIds = 0;
 
     public Tecnico(string pNombre, string pApellido, int pCi, string pEspecialidad) : base(pNombre, pApellido, pCi)
