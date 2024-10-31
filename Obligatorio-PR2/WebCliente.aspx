@@ -3,11 +3,6 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     &nbsp; 
 
-    <asp:Label ID="Label1" runat="server" Text="Id: "></asp:Label>
-    <asp:TextBox ID="txtIdCliente" TextMode="Number" runat="server"></asp:TextBox>
-    <asp:RequiredFieldValidator runat="server" ID="txtIdC" ControlToValidate="txtIdCliente" ForeColor="Red" Text="el id es requerido"></asp:RequiredFieldValidator>
-    <br/>
-
     <asp:Label ID="label2" runat="server" Text="Nombre: "></asp:Label>
     <asp:TextBox ID="txtNombreCliente" runat="server"></asp:TextBox>
     <asp:RequiredFieldValidator runat="server" ID="txtNombreC" ControlToValidate="txtNombreCliente" ForeColor="Red" Text="el nombre es requerido"></asp:RequiredFieldValidator>

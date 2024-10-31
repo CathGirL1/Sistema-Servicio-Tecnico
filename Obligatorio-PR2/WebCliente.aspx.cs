@@ -120,12 +120,6 @@ namespace Obligatorio_PR2
             }
 
             emailCliente = txtEmailCliente.Text.Trim();
-            if (string.IsNullOrEmpty(emailCliente))
-            {
-                mensajeError.Text = "Debe agregar un email.";
-                mensajeError.Visible = true;
-                return;
-            }
 
             
             BaseDeDatos.AgregarCliente(nombreCliente, apellidoCliente, cedulaCliente, direccionCliente, telefonoCliente, emailCliente);
