@@ -8,43 +8,64 @@
     <asp:RequiredFieldValidator runat="server" ID="txtNombreC" ControlToValidate="txtNombreCliente" ForeColor="Red" Text="el nombre es requerido"></asp:RequiredFieldValidator>
     <br />
 
+    <hr />
+
     <asp:Label ID="label3" runat="server" Text="Apellido: "></asp:Label>
     <asp:TextBox ID="txtApellidoCliente" runat="server"></asp:TextBox>
     <asp:RequiredFieldValidator runat="server" ID="txtApellidoC" ControlToValidate="txtApellidoCliente" ForeColor="Red" Text="el apellido es requerido"></asp:RequiredFieldValidator>
     <br/>
 
-    <asp:Label ID="Label4" runat="server" Text="Cedula: "></asp:Label>
+    <hr />
+
+    <asp:Label ID="Label4" runat="server" Text="Cédula: "></asp:Label>
     <asp:TextBox ID="txtCedulaCliente" runat="server"></asp:TextBox>
     <asp:RequiredFieldValidator runat="server" ID="txtCedulaC" ControlToValidate="txtCedulaCliente" ForeColor="Red" Text="la cedula es requerida"></asp:RequiredFieldValidator>
     <br/>
 
+    <hr />
+
     <asp:Label ID="Label5" runat="server" Text="telefono: "></asp:Label>
-    <asp:TextBox ID="txtTelefonoCliente" TextMode="Number" runat="server"></asp:TextBox>
+    <asp:TextBox ID="txtTelefonoCliente" runat="server"></asp:TextBox>
     <asp:RequiredFieldValidator runat="server" ID="txtATelefonoC" ControlToValidate="txtTelefonoCliente" ForeColor="Red" Text="el telefono es requerido"></asp:RequiredFieldValidator>
     <br/>
 
-    <asp:Label ID="Label6" runat="server" Text="email: "></asp:Label>
+    <hr />
+
+    <asp:Label ID="Label6" runat="server" Text="(Opcional) Email: "></asp:Label>
     <asp:TextBox ID="txtEmailCliente" TextMode="Email" runat="server"></asp:TextBox>
-    <asp:RequiredFieldValidator runat="server" ID="txtEmailC" ControlToValidate="txtEmailCliente" ForeColor="Red" Text="el email es requerido"></asp:RequiredFieldValidator>
+    <asp:RegularExpressionValidator  ID="txtEmailC"  runat="server" ControlToValidate="txtEmailCliente" ForeColor="Red" ErrorMessage="Ingrese un email válido." ValidationExpression="^[^@\s]*$|^[^@\s]+@[^@\s]+\.[^@\s]+$" />
     <br/>
+
+    <hr />
 
     <asp:Label ID="Label7" runat="server" Text="direccion: "></asp:Label>
     <asp:TextBox ID="txtDireccionCliente" runat="server"></asp:TextBox>
     <asp:RequiredFieldValidator runat="server" ID="txtDireccionC" ControlToValidate="txtDireccionCliente" ForeColor="Red" Text="la direccion es requerida"></asp:RequiredFieldValidator>
     <br/>
 
-    <asp:DropDownList ID="listaClientesDrop" runat="server"></asp:DropDownList>
+    <hr />
+
+    
     <asp:Button ID="clickAgrCliente" runat="server" Text="Creación de Cliente" OnClick="clickAgregarCliente" />
+    
+    
+    <br/>
 
+   
 
-    <asp:GridView runat="server" ID="pagClientes">
+   <asp:GridView runat="server" ID="pagClientes" AutoGenerateColumns="False" Width="100%">
+    <Columns>
+        <asp:BoundField DataField="ID" HeaderText="ID"/>
+        <asp:BoundField DataField="Nombre" HeaderText="Nombre"/>
+        <asp:BoundField DataField="Apellido" HeaderText="Apellido"/>
+        <asp:BoundField DataField="Ci" HeaderText="Ci"/>
+        <asp:BoundField DataField="Telefono" HeaderText="Teléfono"/>
+        <asp:BoundField DataField="Email" HeaderText="Email"/>
+        <asp:BoundField DataField="Direccion" HeaderText="Dirección"/>
+    </Columns>
     </asp:GridView>
 
-    <%--<asp:ListView runat="server" ID="pagClientes">
-    <ItemTemplate>
-        <asp:Label ID="lblNombre" runat="server" Text='<%# Bind("nombre") %>'></asp:Label>
-    </ItemTemplate>
-    </asp:ListView>--%>
+
 
 
     <asp:Label ID="mensajeError" runat="server" Visible="false" ForeColor="Red"></asp:Label>

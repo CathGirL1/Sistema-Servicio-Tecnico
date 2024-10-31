@@ -4,17 +4,19 @@
     public string direccion { get; set; }
     public int telefono { get; set; }
     public string email { get; set; }
-    static int id { get; set; }
+    public int id { get;  set; }
 
-    static int contadorIds = 0;
-
+    public static int contadorIds = 0; 
     public Cliente(string pNombre, string pApellido, int pCi, string pDireccion, int pTelefono, string pEmail) : base(pNombre, pApellido, pCi)
     {
         Cliente.contadorIds++;
-        Cliente.id = Cliente.contadorIds;
+        this.id = Cliente.contadorIds;
         this.direccion = pDireccion;
         this.telefono = pTelefono;
+        this.email = pEmail; 
     }
+
+    
 
     public int GetId()
     {

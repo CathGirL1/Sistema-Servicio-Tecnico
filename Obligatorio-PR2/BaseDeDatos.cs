@@ -8,6 +8,8 @@ internal class BaseDeDatos
     public static List<Tecnico> listaTecnicos = new List<Tecnico>();
 
     
+    
+
 
     public static void AgregarCliente(string pNombre, string pApellido, int pCi, string pDireccion, int pTelefono, string pEmail)
     {
@@ -17,10 +19,10 @@ internal class BaseDeDatos
         for (int x = 0; x < listaClientes.Count; x++)
         {
 
-            if (listaClientes[x].GetCi() == pCi)
+            if (listaClientes[x].GetCi() == pCi || listaClientes[x].GetEmail() == pEmail || listaClientes[x].GetTelefono() == pTelefono)
             {
                 existeCliente = true;
-                break;
+                break;  
             }
         }
         if (!existeCliente)
@@ -30,6 +32,8 @@ internal class BaseDeDatos
             listaClientes.Add(nuevoCliente);
         }
     }
+
+    
 
     public static void EliminarCliente(int pId)
     {
@@ -58,13 +62,22 @@ internal class BaseDeDatos
             }
         }
     }
+
+    static BaseDeDatos()
+    {
+        PreCargoClientes();
+    }
     public static void PreCargoClientes()
     {
-        Cliente cliente1 = new Cliente("pepe", "gomez", 2342424, "la calle pou", 09873632, "pepe@gmail.com");
-        Cliente cliente2 = new Cliente("pepe", "gomez", 2342424, "la calle pou", 09873632, "gomez@gmail.com");
+        // es mas seguro crear los clientes precargados dentro de la clase y no dentro del metodo; 
+        Cliente cliente1 = new Cliente("Matias", "Delgado", 0000000, "aguante la calle pou", 09873632, "elMatí@gmail.com");
+        Cliente cliente2 = new Cliente("Cathy", "Sonderegger", 00010101, "que se acabe la politica", 09873632, "laCathy@gmail.com");
         listaClientes.Add(cliente1);
         listaClientes.Add(cliente2);
     }
+
+   
+
 
 }
 

@@ -12,8 +12,12 @@
         </address>
 
         <address>
-            <strong>Support:</strong>   <a href="mailto:Support@example.com">Support@example.com</a><br />
-            <strong>Marketing:</strong> <a href="mailto:Marketing@example.com">Marketing@example.com</a>
+            <strong>Support:</strong><a href="mailto:Support@example.com">elMati@gmail.com</a><br /> 
+            <hr /> 
+            <a href="mailto:Support@example.com">laCathy@gmail.com</a><br />  <hr />
+            <strong>Marketing:</strong><a href="mailto:Marketing@example.com">elMati@gmail.com</a>  
+            <hr />
+            <a href="mailto:Support@example.com">laCathy@gmail.com</a><br />
         </address>
     </main>
 </asp:Content>
