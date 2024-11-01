@@ -19,7 +19,9 @@
 
     <asp:Label ID="Label4" runat="server" Text="Cédula: "></asp:Label>
     <asp:TextBox ID="txtCedulaCliente" runat="server"></asp:TextBox>
-    <asp:RequiredFieldValidator runat="server" ID="txtCedulaC" ControlToValidate="txtCedulaCliente" ForeColor="Red" Text="la cedula es requerida"></asp:RequiredFieldValidator>
+    <asp:RequiredFieldValidator runat="server" ID="rfvCedula" ControlToValidate="txtCedulaCliente" ForeColor="Red" Text="La cédula es requerida." ErrorMessageDisplayLocation="Inline"></asp:RequiredFieldValidator>
+    <asp:RegularExpressionValidator runat="server" ID="revCedula" ControlToValidate="txtCedulaCliente" ForeColor="Red" Text="Ingrese un número de cédula válido." ValidationExpression="^\d{7,8}$" ErrorMessageDisplayLocation="Inline" />
+    
     <br/>
 
     <hr />
