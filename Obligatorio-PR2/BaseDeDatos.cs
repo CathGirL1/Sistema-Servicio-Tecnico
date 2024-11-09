@@ -1,4 +1,3 @@
-﻿using System;
 using System.Collections.Generic;
 // la grilla no deja mostrarla si las propiedades son privadas, la grilla es donde se mostrara la lista de clientes, tecicos, etc
 
@@ -51,11 +50,10 @@ internal class BaseDeDatos
     {
         for (int x = 0; x < listaClientes.Count; x++)
         {
-            if (listaClientes[x].GetId() == pId)
+            if (listaClientes[x].GetCi() == pCi)
             {
                 listaClientes[x].SetNombre(pNombre);
                 listaClientes[x].SetApellido(pApellido);
-                listaClientes[x].SetCi(pCi);
                 listaClientes[x].SetDireccion(pDireccion);
                 listaClientes[x].SetTelefono(pTelefono);
                 listaClientes[x].SetEmail(pEmail);

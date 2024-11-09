@@ -5,51 +5,46 @@
 
     <asp:Label ID="label2" runat="server" Text="Nombre: "></asp:Label>
     <asp:TextBox ID="txtNombreCliente" runat="server"></asp:TextBox>
-    <asp:RequiredFieldValidator runat="server" ID="txtNombreC" ControlToValidate="txtNombreCliente" ForeColor="Red" Text="el nombre es requerido"></asp:RequiredFieldValidator>
+    </div>
+    <asp:RequiredFieldValidator runat="server" ID="txtNombreC" ControlToValidate="txtNombreCliente" ForeColor="Red" ErrorMessage="El nombre es requerido." Display="Dynamic" />
     <br />
-
-    <hr />
 
     <asp:Label ID="label3" runat="server" Text="Apellido: "></asp:Label>
     <asp:TextBox ID="txtApellidoCliente" runat="server"></asp:TextBox>
-    <asp:RequiredFieldValidator runat="server" ID="txtApellidoC" ControlToValidate="txtApellidoCliente" ForeColor="Red" Text="el apellido es requerido"></asp:RequiredFieldValidator>
+    </div>
+    <asp:RequiredFieldValidator runat="server" ID="txtApellidoC" ControlToValidate="txtApellidoCliente" ForeColor="Red" ErrorMessage="El apellido es requerido." Display="Dynamic" />
     <br/>
-
-    <hr />
 
     <asp:Label ID="Label4" runat="server" Text="Cédula: "></asp:Label>
     <asp:TextBox ID="txtCedulaCliente" runat="server"></asp:TextBox>
-    <asp:RequiredFieldValidator runat="server" ID="rfvCedula" ControlToValidate="txtCedulaCliente" ForeColor="Red" Text="La cédula es requerida." ErrorMessageDisplayLocation="Inline"></asp:RequiredFieldValidator>
-    <asp:RegularExpressionValidator runat="server" ID="revCedula" ControlToValidate="txtCedulaCliente" ForeColor="Red" Text="Ingrese un número de cédula válido." ValidationExpression="^\d{7,8}$" ErrorMessageDisplayLocation="Inline" />
-    
+    </div>
+    <asp:RequiredFieldValidator runat="server" ID="rfvCedula" ControlToValidate="txtCedulaCliente" ForeColor="Red" ErrorMessage="La cédula es requerida." ErrorMessageDisplayLocation="Inline" ValidationExpression="^\d{1,2}\.\d{3}\.\d{3}$" />
     <br/>
-
-    <hr />
 
     <asp:Label ID="Label5" runat="server" Text="telefono: "></asp:Label>
     <asp:TextBox ID="txtTelefonoCliente" runat="server"></asp:TextBox>
-    <asp:RequiredFieldValidator runat="server" ID="txtATelefonoC" ControlToValidate="txtTelefonoCliente" ForeColor="Red" Text="el telefono es requerido"></asp:RequiredFieldValidator>
+    </div>
+    <asp:RequiredFieldValidator runat="server" ID="txtATelefonoC" ControlToValidate="txtTelefonoCliente" ForeColor="Red" ErrorMessage="El teléfono es requerido." Display="Dynamic" />
     <br/>
 
-    <hr />
-
+    <!-- Email -->
+    <div style="text-align: left; margin-bottom: 10px;">
     <asp:Label ID="Label6" runat="server" Text="(Opcional) Email: "></asp:Label>
     <asp:TextBox ID="txtEmailCliente" TextMode="Email" runat="server"></asp:TextBox>
     <asp:RegularExpressionValidator  ID="txtEmailC"  runat="server" ControlToValidate="txtEmailCliente" ForeColor="Red" ErrorMessage="Ingrese un email válido." ValidationExpression="^[^@\s]*$|^[^@\s]+@[^@\s]+\.[^@\s]+$" />
     <br/>
 
     <hr />
-
     <asp:Label ID="Label7" runat="server" Text="direccion: "></asp:Label>
     <asp:TextBox ID="txtDireccionCliente" runat="server"></asp:TextBox>
-    <asp:RequiredFieldValidator runat="server" ID="txtDireccionC" ControlToValidate="txtDireccionCliente" ForeColor="Red" Text="la direccion es requerida"></asp:RequiredFieldValidator>
+    </div>
+    <asp:RequiredFieldValidator runat="server" ID="txtDireccionC" ControlToValidate="txtDireccionCliente" ForeColor="Red" ErrorMessage="La dirección es requerida." Display="Dynamic" />
     <br/>
 
+    <asp:Button ID="clickAgrCliente" runat="server" Text="Creación de cliente" OnClick="clickAgregarCliente" /> 
+    <asp:Button ID="BotonEditar" runat="server" Text=" Editar cliente" OnClick="clickEditarCliente" />
+    
     <hr />
-
-    
-    <asp:Button ID="clickAgrCliente" runat="server" Text="Creación de Cliente" OnClick="clickAgregarCliente" />
-    
     
     <br/>
 
