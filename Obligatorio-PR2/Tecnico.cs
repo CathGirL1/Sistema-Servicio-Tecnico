@@ -6,7 +6,7 @@ internal class Tecnico : Persona
     static int id { get; set;}
     static int contadorIds = 0;
 
-    public Tecnico(string pNombre, string pApellido, int pCi, string pEspecialidad) : base(pNombre, pApellido, pCi)
+    public Tecnico(string pNombre, string pApellido, string pCi, string pEspecialidad) : base(pNombre, pApellido, pCi)
     {
         Tecnico.contadorIds++;
         Tecnico.id = Tecnico.contadorIds;

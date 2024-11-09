@@ -2,9 +2,9 @@
 {
     public string nombre { get; set; }
     public string apellido { get; set; }
-    public int ci { get; set; }
+    public string ci { get; set; }
 
-    public Persona(string pNombre, string pApellido, int pCi)
+    public Persona(string pNombre, string pApellido, string pCi)
     {
         this.nombre = pNombre;
         this.apellido = pApellido;
@@ -19,7 +19,7 @@
     {
         return apellido;
     }
-    public int GetCi()
+    public string GetCi()
     {
         return ci;
     }
@@ -32,7 +32,7 @@
     {
         apellido = pApellido;
     }
-    public void SetCi(int pCi)
+    public void SetCi(string pCi)
     {
         ci = pCi;
     }

@@ -87,13 +87,13 @@ namespace Obligatorio_PR2
         protected global::System.Web.UI.WebControls.TextBox txtCedulaCliente;
 
         /// <summary>
-        /// Control txtCedulaC.
+        /// Control rfvCedula.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator txtCedulaC;
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvCedula;
 
         /// <summary>
         /// Control Label5.
@@ -184,6 +184,15 @@ namespace Obligatorio_PR2
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button clickAgrCliente;
+
+        /// <summary>
+        /// Control BotonEditar.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button BotonEditar;
 
         /// <summary>
         /// Control pagClientes.
