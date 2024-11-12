@@ -105,7 +105,7 @@ namespace Obligatorio_PR2
                     return;
                 }
 
-                Regex regex = new Regex("^[a-zA-Z]+$");
+                Regex regex = new Regex("^[a-zA-ZáéíóúÁÉÍÓÚñÑ]+$");
                 if (!regex.IsMatch(nombreCliente))
                 {
                     mensajeError.Text = "El nombre solo puede contener letras sin espacios.";
@@ -126,7 +126,7 @@ namespace Obligatorio_PR2
                     mensajeError.Visible = true;
                     return;
                 }
-                Regex soloLetrasApellido = new Regex("^[a-zA-Z]+$");
+                Regex soloLetrasApellido = new Regex("^[a-zA-ZáéíóúÁÉÍÓÚñÑ]+$");
                 if (!soloLetrasApellido.IsMatch(apellidoCliente))
                 {
                     mensajeError.Text = "El apellido solo puede contener letras sin espacios.";
@@ -179,9 +179,7 @@ namespace Obligatorio_PR2
 
             BaseDeDatos.AgregarCliente(nombreCliente, apellidoCliente, cedulaConFormato, direccionCliente, telefonoCliente, emailCliente);
 
-
             ActualizarListas();
-
 
             txtNombreCliente.Text = "";
             txtApellidoCliente.Text = "";
@@ -190,11 +188,7 @@ namespace Obligatorio_PR2
             txtTelefonoCliente.Text = "";
             txtEmailCliente.Text = "";
 
-
-
         }
-
-
 
         protected void clickEditarCliente(object sender, EventArgs e)
         {
@@ -206,7 +200,7 @@ namespace Obligatorio_PR2
             string telefonoCliente = txtTelefonoCliente.Text.Trim();
             string emailCliente = txtEmailCliente.Text.Trim();
             bool encontrarCliente = false;
-           
+
 
             for (int i = 0; i < BaseDeDatos.listaClientes.Count; i++)
             {
@@ -215,7 +209,8 @@ namespace Obligatorio_PR2
                     encontrarCliente = true;
                 }
             }
-            if(!encontrarCliente) { // error
+            if (!encontrarCliente)
+            { // error
                 mensajeError.Text = "El cliente no existe";
                 mensajeError.Visible = true;
                 return;
@@ -240,7 +235,7 @@ namespace Obligatorio_PR2
             }
 
             string validacionTelefono = Utilities.ValidarSoloInt(telefonoCliente);
-            if(validacionTelefono != string.Empty)
+            if (validacionTelefono != string.Empty)
             {
                 mensajeError.Text = validacionTelefono;
                 huboError = true;
@@ -258,7 +253,7 @@ namespace Obligatorio_PR2
             }
 
             string validacionEmail = Utilities.ValidarEmail(emailCliente);
-            if(validacionEmail != string.Empty)
+            if (validacionEmail != string.Empty)
             {
                 mensajeError.Text = validacionEmail;
                 huboError = true;
@@ -282,45 +277,42 @@ namespace Obligatorio_PR2
 
         }
 
-
-        protected void clickEliminarCliente(object sender, GridViewCommandEventArgs e)
+        protected void clickEliminarCliente(object sender, EventArgs e)
         {
             string cedulaClienteEliminarString;
             int cedulaEliminar = 0;
-            string cedulaConFormato; 
+            string cedulaConFormato;
 
-            while (true)
+            cedulaClienteEliminarString = txtCedulaCliente.Text.Trim();
+
+            if (string.IsNullOrEmpty(cedulaClienteEliminarString))
             {
-                cedulaClienteEliminarString = txtCedulaCliente.Text.Trim();
-
-                if (string.IsNullOrEmpty(cedulaClienteEliminarString))
-                {
-                    mensajeError.Text = "Debe agregar una cédula.";
-                    mensajeError.Visible = true;
-                    return;
-                }
-
-                Regex cedulaFormatoCedula = new Regex(@"^(\d{1,2}[-\.]?\d{3}[-\.]?\d{3}|\d{6,8})$");
-                if (!cedulaFormatoCedula.IsMatch(cedulaClienteEliminarString))
-                {
-                    mensajeError.Text = "La cédula debe de ser numérica, opcionalmente con guiones o puntos.";
-                    mensajeError.Visible = true;
-                    return;
-                }
-
-                string cedulaSinFormato = cedulaClienteEliminarString.Replace(".", "").Replace("-", "");
-                if (int.TryParse(cedulaSinFormato, out cedulaEliminar))
-                {
-                    cedulaConFormato = Utilities.FormatearCedula(cedulaSinFormato);
-                    break;
-                }
-                else
-                {
-                    mensajeError.Text = "La cédula debe ser un número válido.";
-                    mensajeError.Visible = true;
-                    return;
-                }
+                mensajeError.Text = "Debe agregar una cédula.";
+                mensajeError.Visible = true;
+                return;
             }
+
+            Regex cedulaFormatoCedula = new Regex(@"^(\d{1,2}[-\.]?\d{3}[-\.]?\d{3}|\d{6,8})$");
+            if (!cedulaFormatoCedula.IsMatch(cedulaClienteEliminarString))
+            {
+                mensajeError.Text = "La cédula debe de ser numérica, opcionalmente con guiones o puntos.";
+                mensajeError.Visible = true;
+                return;
+            }
+
+            string cedulaSinFormato = cedulaClienteEliminarString.Replace(".", "").Replace("-", "");
+            if (int.TryParse(cedulaSinFormato, out cedulaEliminar))
+            {
+                cedulaConFormato = Utilities.FormatearCedula(cedulaSinFormato);
+                
+            }
+            else
+            {
+                mensajeError.Text = "La cédula debe ser un número válido.";
+                mensajeError.Visible = true;
+                return;
+            }
+         
 
             bool buscarClienteElimnar = false;
 
@@ -329,7 +321,7 @@ namespace Obligatorio_PR2
             {
                 if (Utilities.FormatearCedula(BaseDeDatos.listaClientes[i].GetCi()) == cedulaConFormato)
                 {
-                    buscarClienteElimnar = true; 
+                    buscarClienteElimnar = true;
                 }
             }
             if (!buscarClienteElimnar)
@@ -353,9 +345,6 @@ namespace Obligatorio_PR2
 
             txtCedulaCliente.Text = "";
         }
-                    
-
-
 
         protected void ActualizarListas()
         {
@@ -365,51 +354,69 @@ namespace Obligatorio_PR2
 
         }
 
-        
-    }
-
-
-
-    internal struct NewStruct
-    {
-        public object Item1;
-        public object Item2;
-
-        public NewStruct(object item1, object item2)
+        protected void ClickBuscarCliente(object sender, EventArgs e)
         {
-            Item1 = item1;
-            Item2 = item2;
-        }
+            string cedulaCliente = txtBuscarCliente.Text.Trim();
+            bool encontrarCliente = false;
 
-        public override bool Equals(object obj)
-        {
-            return obj is NewStruct other &&
-                   EqualityComparer<object>.Default.Equals(Item1, other.Item1) &&
-                   EqualityComparer<object>.Default.Equals(Item2, other.Item2);
-        }
+            for (int i = 0; i < pagClientes.Rows.Count; i++)
+            {
+                GridViewRow filaGrilla = pagClientes.Rows[i];
+                filaGrilla.Visible = true;
+            }
 
-        public override int GetHashCode()
-        {
-            int hashCode = -1030903623;
-            hashCode = hashCode * -1521134295 + EqualityComparer<object>.Default.GetHashCode(Item1);
-            hashCode = hashCode * -1521134295 + EqualityComparer<object>.Default.GetHashCode(Item2);
-            return hashCode;
-        }
+            for (int i = 0; i < pagClientes.Rows.Count; i++)
+            {
+                GridViewRow filaGrilla = pagClientes.Rows[i];
 
-        public void Deconstruct(out object item1, out object item2)
-        {
-            item1 = Item1;
-            item2 = Item2;
-        }
 
-        public static implicit operator (object, object)(NewStruct value)
-        {
-            return (value.Item1, value.Item2);
-        }
+                string cedulaGrilla = "";
+                Label lblCedula = (Label)filaGrilla.Cells[3].FindControl("lblCedula");
+                if (lblCedula != null)
+                {
+                    cedulaGrilla = lblCedula.Text.Trim();
+                }
 
-        public static implicit operator NewStruct((object, object) value)
-        {
-            return new NewStruct(value.Item1, value.Item2);
+
+                if (Utilities.FormatearCedula(cedulaGrilla) == Utilities.FormatearCedula(cedulaCliente))
+                {
+                    filaGrilla.Visible = true;
+                    encontrarCliente = true;
+                }
+                else
+                {
+                    filaGrilla.Visible = false;
+                }
+            }
+
+            if (!encontrarCliente)
+            {
+                if (string.IsNullOrEmpty(cedulaCliente))
+                {
+                    ActualizarListas();
+                    mensajeError.Text = "Cédula inválida..";
+                    mensajeError.Visible = true;
+                }
+                else
+                {
+                    ActualizarListas();
+                    mensajeError.Text = "El cliente no existe.";
+                    mensajeError.Visible = true;
+                }
+
+            }
+            else
+            {
+                mensajeError.Visible = false;
+            }
+
+
+
+
+
+
         }
     }
 }
+
+    

@@ -12,7 +12,7 @@ namespace Obligatorio_PR2
         public static string ValidarSoloTexto(string texto)
         {
             string mensajeError = string.Empty;
-            Regex regex = new Regex("^[a-zA-Z]+$");
+            Regex regex = new Regex("^[a-zA-ZáéíóúÁÉÍÓÚñÑ]+$");
 
             if (string.IsNullOrEmpty(texto))
             {
