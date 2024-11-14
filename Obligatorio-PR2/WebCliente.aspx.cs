@@ -12,14 +12,12 @@ namespace Obligatorio_PR2
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            //List<Cliente> listaClientes = new List<Cliente>();
-            //listaClientes.Add(new Cliente("Matias", "Delgado", 123, "San Carlos", 123, "matiasdels@gmail.com"));
+      
             if (!IsPostBack)
             {
-                //pagClientes.DataSource = BaseDeDatos.listaClientes;
+
                 pagClientes.DataSource = BaseDeDatos.listaClientes;
                 pagClientes.DataBind();
-
 
             }
 
@@ -190,9 +188,36 @@ namespace Obligatorio_PR2
 
         }
 
-        protected void clickEditarCliente(object sender, EventArgs e)
+        protected void clickEditarCliente(object sender, CommandEventArgs e)
         {
 
+            if(e.CommandName == "EditarCliente")
+            {
+                int filaIndice = Convert.ToInt32(e.CommandArgument);
+
+                GridViewRow fila = pagClientes.Rows[filaIndice];
+
+                txtNombreCliente.Text = fila.Cells[1].Text;
+                txtApellidoCliente.Text = fila.Cells[2].Text;
+
+                Label lblCedula = (Label)fila.FindControl("lblCedula");
+                if(lblCedula != null)
+                {
+                    txtCedulaCliente.Text = lblCedula.Text;
+                }
+
+                txtTelefonoCliente.Text = fila.Cells[4].Text;
+                txtEmailCliente.Text = fila.Cells[5].Text;
+                txtDireccionCliente.Text = fila.Cells[6].Text;
+
+                ActualizarListas();
+            }
+            
+        }
+
+        protected void clickGuardarCliente(object sender, EventArgs e)
+        {
+            // ACA GUARDAR LO DE LAS TEXTBOX EN LA GRILLA, DONDE LA CEDULA SEA IGUAL.
             string cedulaCliente = txtCedulaCliente.Text.Trim();
             string nombreCliente = txtNombreCliente.Text.Trim();
             string apellidoCliente = txtApellidoCliente.Text.Trim();
@@ -200,7 +225,6 @@ namespace Obligatorio_PR2
             string telefonoCliente = txtTelefonoCliente.Text.Trim();
             string emailCliente = txtEmailCliente.Text.Trim();
             bool encontrarCliente = false;
-
 
             for (int i = 0; i < BaseDeDatos.listaClientes.Count; i++)
             {
@@ -210,7 +234,7 @@ namespace Obligatorio_PR2
                 }
             }
             if (!encontrarCliente)
-            { // error
+            { 
                 mensajeError.Text = "El cliente no existe";
                 mensajeError.Visible = true;
                 return;
@@ -218,7 +242,7 @@ namespace Obligatorio_PR2
 
             bool huboError = false;
             int numeroParseadoTelefono = 0;
-            //validaciones
+            
 
             string validacionNombre = Utilities.ValidarSoloTexto(nombreCliente);
             if (validacionNombre != string.Empty)
@@ -258,14 +282,12 @@ namespace Obligatorio_PR2
                 mensajeError.Text = validacionEmail;
                 huboError = true;
             }
-            // fin validaciones
 
             if (!huboError)
             {
                 BaseDeDatos.EditarCliente(cedulaCliente, nombreCliente, apellidoCliente, direccionCliente, numeroParseadoTelefono, emailCliente);
 
                 ActualizarListas();
-
 
                 txtNombreCliente.Text = "";
                 txtApellidoCliente.Text = "";
@@ -277,80 +299,30 @@ namespace Obligatorio_PR2
 
         }
 
-        protected void clickEliminarCliente(object sender, EventArgs e)
+        protected void clickEliminarCliente(object sender, CommandEventArgs e)
         {
-            string cedulaClienteEliminarString;
-            int cedulaEliminar = 0;
-            string cedulaConFormato;
 
-            cedulaClienteEliminarString = txtCedulaCliente.Text.Trim();
-
-            if (string.IsNullOrEmpty(cedulaClienteEliminarString))
+            if (e.CommandName == "EliminarCliente")
             {
-                mensajeError.Text = "Debe agregar una cédula.";
+                string cedula = e.CommandArgument.ToString();
+
+                BaseDeDatos.EliminarCliente(cedula);
+
+                mensajeError.Text = "Cliente eliminado correctamente.";
                 mensajeError.Visible = true;
-                return;
+
+                ActualizarListas();
             }
-
-            Regex cedulaFormatoCedula = new Regex(@"^(\d{1,2}[-\.]?\d{3}[-\.]?\d{3}|\d{6,8})$");
-            if (!cedulaFormatoCedula.IsMatch(cedulaClienteEliminarString))
-            {
-                mensajeError.Text = "La cédula debe de ser numérica, opcionalmente con guiones o puntos.";
-                mensajeError.Visible = true;
-                return;
-            }
-
-            string cedulaSinFormato = cedulaClienteEliminarString.Replace(".", "").Replace("-", "");
-            if (int.TryParse(cedulaSinFormato, out cedulaEliminar))
-            {
-                cedulaConFormato = Utilities.FormatearCedula(cedulaSinFormato);
-                
-            }
-            else
-            {
-                mensajeError.Text = "La cédula debe ser un número válido.";
-                mensajeError.Visible = true;
-                return;
-            }
-         
-
-            bool buscarClienteElimnar = false;
-
-
-            for (int i = 0; i < BaseDeDatos.listaClientes.Count; i++)
-            {
-                if (Utilities.FormatearCedula(BaseDeDatos.listaClientes[i].GetCi()) == cedulaConFormato)
-                {
-                    buscarClienteElimnar = true;
-                }
-            }
-            if (!buscarClienteElimnar)
-            { // error
-                mensajeError.Text = "El cliente no existe";
-                mensajeError.Visible = true;
-                return;
-            }
-
-
-            BaseDeDatos.EliminarCliente(cedulaConFormato);
-
-            ActualizarListas();
-
-            mensajeError.Text = "Cliente eliminado correctamente.";
-            mensajeError.Visible = true;
-
-            // Para ocultarlo después de unos segundos, si es necesario
-            System.Threading.Thread.Sleep(2000);  // (2 segundos)
-            mensajeError.Visible = false;
 
             txtCedulaCliente.Text = "";
         }
 
         protected void ActualizarListas()
         {
+            int paginaActual = pagClientes.PageIndex;
             pagClientes.DataSource = BaseDeDatos.listaClientes;
             pagClientes.DataBind();
-
+            pagClientes.PageIndex = paginaActual;
 
         }
 
@@ -409,11 +381,6 @@ namespace Obligatorio_PR2
             {
                 mensajeError.Visible = false;
             }
-
-
-
-
-
 
         }
     }

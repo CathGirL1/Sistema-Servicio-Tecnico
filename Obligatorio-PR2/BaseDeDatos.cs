@@ -8,13 +8,8 @@ internal class BaseDeDatos
     public static List<Cliente> listaClientes = new List<Cliente>();
     public static List<Tecnico> listaTecnicos = new List<Tecnico>();
 
-
-
-
-
     public static void AgregarCliente(string pNombre, string pApellido, string pCi, string pDireccion, int pTelefono, string pEmail)
     {
-
 
         bool existeCliente = false;
         for (int x = 0; x < listaClientes.Count; x++)
@@ -33,8 +28,6 @@ internal class BaseDeDatos
             listaClientes.Add(nuevoCliente);
         }
     }
-
-
 
     public static void EliminarCliente(string pCi)
     {
@@ -65,7 +58,6 @@ internal class BaseDeDatos
 
     }
 
-    
 
     static BaseDeDatos()
     {
@@ -73,16 +65,11 @@ internal class BaseDeDatos
     }
     public static void PreCargoClientes()
     {
-        // es mas seguro crear los clientes precargados dentro de la clase y no dentro del metodo; 
-        Cliente cliente1 = new Cliente("Matias", "Delgado", "0000000", "aguante la calle pou", 09873632, "elMatí@gmail.com");
+        Cliente cliente1 = new Cliente("Matias", "Delgado", "0000000", "aguante la calle pou", 09873632, "elMati@gmail.com");
         Cliente cliente2 = new Cliente("Cathy", "Sonderegger", "00010101", "que se acabe la politica", 12345678, "laCathy@gmail.com");
         listaClientes.Add(cliente1);
         listaClientes.Add(cliente2);
     }
-    // tarea.
-    // hay que validar que en el editar y eliminar todas las propiedades excepto cedula sea requerida
-    
-
 
 }
 

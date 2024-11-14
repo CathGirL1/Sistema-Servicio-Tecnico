@@ -15,13 +15,13 @@ namespace Obligatorio_PR2
     {
 
         /// <summary>
-        /// Control label2.
+        /// Control labelNombre.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label label2;
+        protected global::System.Web.UI.WebControls.Label labelNombre;
 
         /// <summary>
         /// Control txtNombreCliente.
@@ -42,13 +42,13 @@ namespace Obligatorio_PR2
         protected global::System.Web.UI.WebControls.RequiredFieldValidator txtNombreC;
 
         /// <summary>
-        /// Control label3.
+        /// Control labelApellido.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label label3;
+        protected global::System.Web.UI.WebControls.Label labelApellido;
 
         /// <summary>
         /// Control txtApellidoCliente.
@@ -69,13 +69,13 @@ namespace Obligatorio_PR2
         protected global::System.Web.UI.WebControls.RequiredFieldValidator txtApellidoC;
 
         /// <summary>
-        /// Control Label4.
+        /// Control LabelCedula.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label4;
+        protected global::System.Web.UI.WebControls.Label LabelCedula;
 
         /// <summary>
         /// Control txtCedulaCliente.
@@ -96,13 +96,13 @@ namespace Obligatorio_PR2
         protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvCedula;
 
         /// <summary>
-        /// Control Label5.
+        /// Control LabelTelefono.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label5;
+        protected global::System.Web.UI.WebControls.Label LabelTelefono;
 
         /// <summary>
         /// Control txtTelefonoCliente.
@@ -123,13 +123,13 @@ namespace Obligatorio_PR2
         protected global::System.Web.UI.WebControls.RequiredFieldValidator txtATelefonoC;
 
         /// <summary>
-        /// Control Label6.
+        /// Control LabelEmail.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label6;
+        protected global::System.Web.UI.WebControls.Label LabelEmail;
 
         /// <summary>
         /// Control txtEmailCliente.
@@ -150,13 +150,13 @@ namespace Obligatorio_PR2
         protected global::System.Web.UI.WebControls.RegularExpressionValidator txtEmailC;
 
         /// <summary>
-        /// Control Label7.
+        /// Control LabelDireccion.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label7;
+        protected global::System.Web.UI.WebControls.Label LabelDireccion;
 
         /// <summary>
         /// Control txtDireccionCliente.
@@ -184,6 +184,15 @@ namespace Obligatorio_PR2
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button clickAgrCliente;
+
+        /// <summary>
+        /// Control clickGrdCliente.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button clickGrdCliente;
 
         /// <summary>
         /// Control txtBuscarCliente.
