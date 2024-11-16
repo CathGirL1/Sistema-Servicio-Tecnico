@@ -277,8 +277,6 @@ namespace Obligatorio_PR2
             }
 
             string validacionEmail = Utilities.ValidarEmail(emailCliente);
-            if (validacionEmail != string.Empty)
-            {
                 mensajeError.Text = validacionEmail;
                 huboError = true;
             }
