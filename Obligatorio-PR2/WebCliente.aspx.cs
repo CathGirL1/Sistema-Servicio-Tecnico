@@ -35,7 +35,8 @@ namespace Obligatorio_PR2
             string cedulaString;
             string cedulaConFormato;
 
-
+            // se pone el while para que una vez que entre el dato dentro del if lo valide, si el dato
+            // es correcto se corta el while gracias al return, si no es asi se muestra msj de error
             while (true)
             {
                 cedulaString = txtCedulaCliente.Text.Trim();
@@ -223,14 +224,21 @@ namespace Obligatorio_PR2
             string apellidoCliente = txtApellidoCliente.Text.Trim();
             string direccionCliente = txtDireccionCliente.Text.Trim();
             string telefonoCliente = txtTelefonoCliente.Text.Trim();
-            string emailCliente = txtEmailCliente.Text.Trim();
+            
             bool encontrarCliente = false;
+            // es del tipo cliente npor la referencia en memoria, si es null es que no hay ninguna referencia en memoria q se encuentre ese cliente con esa cedula.
+            Cliente clienteEncontrado = null; 
+
+
 
             for (int i = 0; i < BaseDeDatos.listaClientes.Count; i++)
             {
                 if (Utilities.FormatearCedula(BaseDeDatos.listaClientes[i].GetCi()) == Utilities.FormatearCedula(cedulaCliente))
                 {
                     encontrarCliente = true;
+                    // segun la posicion se gurada el cliente q se encontro
+                    clienteEncontrado = BaseDeDatos.listaClientes[i]; 
+                    break; 
                 }
             }
             if (!encontrarCliente)
@@ -242,19 +250,22 @@ namespace Obligatorio_PR2
 
             bool huboError = false;
             int numeroParseadoTelefono = 0;
-            
+
 
             string validacionNombre = Utilities.ValidarSoloTexto(nombreCliente);
             if (validacionNombre != string.Empty)
             {
                 mensajeError.Text = validacionNombre;
+                mensajeError.Visible = true; 
                 huboError = true;
             }
+
 
             string validacionApellido = Utilities.ValidarSoloTexto(apellidoCliente);
             if (validacionApellido != string.Empty)
             {
                 mensajeError.Text = validacionApellido;
+                mensajeError.Visible = true; 
                 huboError = true;
             }
 
@@ -262,6 +273,7 @@ namespace Obligatorio_PR2
             if (validacionTelefono != string.Empty)
             {
                 mensajeError.Text = validacionTelefono;
+                mensajeError.Visible = true; 
                 huboError = true;
             }
             else
@@ -273,17 +285,30 @@ namespace Obligatorio_PR2
             if (validacionDireccion != string.Empty)
             {
                 mensajeError.Text = validacionDireccion;
+                mensajeError.Visible = true;
                 huboError = true;
             }
 
+            string emailCliente = txtEmailCliente.Text.Trim();
+            string cleanedEmail = emailCliente.Replace("&nbsp;", "").Trim();
+            txtEmailCliente.Text = cleanedEmail;
+            
             string validacionEmail = Utilities.ValidarEmail(emailCliente);
+            if (!string.IsNullOrEmpty(validacionEmail)) //aca lo que se esta haciendo es que si el email no esta vacio o nulo basicamente si se muestra el msj error
+            {
                 mensajeError.Text = validacionEmail;
+                mensajeError.Visible = true;
                 huboError = true;
             }
 
-            if (!huboError)
+
+
+            if (!huboError)          
             {
-                BaseDeDatos.EditarCliente(cedulaCliente, nombreCliente, apellidoCliente, direccionCliente, numeroParseadoTelefono, emailCliente);
+                //los precargados son objetos y no solo campos q se debe de almacenar por lo tanto se utiliza el objeto.
+                // "clienteEncontrado.propiedad" para almacera lo que venga por parametro. 
+
+                BaseDeDatos.EditarCliente(clienteEncontrado.ci = cedulaCliente, clienteEncontrado.nombre = nombreCliente, clienteEncontrado.apellido = apellidoCliente, clienteEncontrado.direccion = direccionCliente, clienteEncontrado.telefono = numeroParseadoTelefono, clienteEncontrado.email = emailCliente.Trim());
 
                 ActualizarListas();
 

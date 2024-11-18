@@ -11,19 +11,21 @@ namespace Obligatorio_PR2
     {
         public static string ValidarSoloTexto(string texto)
         {
-            string mensajeError = string.Empty;
+            string mensajeError = string.Empty; 
             Regex regex = new Regex("^[a-zA-ZáéíóúÁÉÍÓÚñÑ]+$");
 
             if (string.IsNullOrEmpty(texto))
             {
                 mensajeError = "Debe completar este campo.";
+                return mensajeError;
             }
             if (!regex.IsMatch(texto))
             {
                 mensajeError = "Este campo puede contener letras sin espacios.";
+                return mensajeError;
             }
 
-            return mensajeError;
+            return mensajeError; 
         }
 
         public static string FormatearCedula(string pCedula)
@@ -58,7 +60,7 @@ namespace Obligatorio_PR2
 
             if (!numero.All(char.IsDigit))
             {
-                mensajeError = "Este campo solo puede contener dígitos.";
+                mensajeError = "Este campo solo puede contener dígitos numericos.";
             }
             return mensajeError;
         }
@@ -82,6 +84,12 @@ namespace Obligatorio_PR2
         public static string ValidarEmail(string email)
         {
             string mensajeError = string.Empty;
+
+            if (string.IsNullOrEmpty(email))
+            {
+                return mensajeError; // por que el campo esta vacio se retorna vacio ya q el email es opcional y puede estar vacio. 
+            }
+
             Regex emailRegex = new Regex(@"^[^@\s]+@[^@\s]+\.(com|net|org|edu)$");
             if (!emailRegex.IsMatch(email))
             {

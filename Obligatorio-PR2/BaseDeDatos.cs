@@ -47,11 +47,11 @@ internal class BaseDeDatos
         {
             if (listaClientes[x].GetCi() == pCi)
             {
-                listaClientes[x].SetNombre(pNombre);
-                listaClientes[x].SetApellido(pApellido);
-                listaClientes[x].SetDireccion(pDireccion);
-                listaClientes[x].SetTelefono(pTelefono);
-                listaClientes[x].SetEmail(pEmail);
+                listaClientes[x].nombre = pNombre;
+                listaClientes[x].apellido = pApellido;
+                listaClientes[x].direccion = pDireccion;
+                listaClientes[x].telefono = pTelefono;
+                listaClientes[x].email = pEmail;
                 break; 
             }
         }
