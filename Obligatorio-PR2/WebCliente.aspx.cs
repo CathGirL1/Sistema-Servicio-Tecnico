@@ -36,6 +36,7 @@ namespace Obligatorio_PR2
             string cedulaString;
             string cedulaConFormato;
 
+
             // se pone el while para que una vez que entre el dato dentro del if lo valide, si el dato
             // es correcto se corta el while gracias al return, si no es asi se muestra msj de error
             while (true)
@@ -181,6 +182,9 @@ namespace Obligatorio_PR2
 
             ActualizarListas();
 
+            mensajeError.Text = "Cliente agregado con éxito.";
+            mensajeError.Visible = true;
+
             txtNombreCliente.Text = "";
             txtApellidoCliente.Text = "";
             txtCedulaCliente.Text = "";
@@ -193,7 +197,7 @@ namespace Obligatorio_PR2
         protected void clickEditarCliente(object sender, CommandEventArgs e)
         {
 
-            if(e.CommandName == "EditarCliente")
+            if (e.CommandName == "EditarCliente")
             {
                 int filaIndice = Convert.ToInt32(e.CommandArgument);
 
@@ -212,20 +216,29 @@ namespace Obligatorio_PR2
                 txtEmailCliente.Text = fila.Cells[5].Text;
                 txtDireccionCliente.Text = fila.Cells[6].Text;
 
+                if (fila.Cells[5].Text == "&nbsp;")
+                {
+                    txtEmailCliente.Text = ""; 
+                }
+
                 ActualizarListas();
+
             }
             
         }
 
         protected void clickGuardarCliente(object sender, EventArgs e)
         {
+            
             // ACA GUARDAR LO DE LAS TEXTBOX EN LA GRILLA, DONDE LA CEDULA SEA IGUAL.
             string cedulaCliente = txtCedulaCliente.Text.Trim();
             string nombreCliente = txtNombreCliente.Text.Trim();
             string apellidoCliente = txtApellidoCliente.Text.Trim();
             string direccionCliente = txtDireccionCliente.Text.Trim();
             string telefonoCliente = txtTelefonoCliente.Text.Trim();
-            
+            string emailCliente = txtEmailCliente.Text.Trim();
+            int numeroParseadoTelefono = 0;
+
             bool encontrarCliente = false;
             // es del tipo cliente npor la referencia en memoria, si es null es que no hay ninguna referencia en memoria q se encuentre ese cliente con esa cedula.
             Cliente clienteEncontrado = null; 
@@ -234,12 +247,33 @@ namespace Obligatorio_PR2
 
             for (int i = 0; i < BaseDeDatos.listaClientes.Count; i++)
             {
+                
                 if (Utilities.FormatearCedula(BaseDeDatos.listaClientes[i].GetCi()) == Utilities.FormatearCedula(cedulaCliente))
                 {
                     encontrarCliente = true;
+                    mensajeError.Text = "Ya hay un cliente con esta cédula.";
+                    mensajeError.Visible = true;
                     // segun la posicion se gurada el cliente q se encontro
                     clienteEncontrado = BaseDeDatos.listaClientes[i]; 
                     break; 
+                }
+                
+                else if (BaseDeDatos.listaClientes[i].GetTelefono() == int.Parse(telefonoCliente))
+                {
+                   
+                    encontrarCliente = true;
+                    mensajeError.Text = "Ya hay un cliente con este telefono.";
+                    mensajeError.Visible = true;
+                    return;
+
+                }
+                else if (BaseDeDatos.listaClientes[i].GetEmail() == emailCliente)
+                {
+                    encontrarCliente = true;
+                    mensajeError.Text = "Ya hay un cliente con este email.";
+                    mensajeError.Visible = true;
+                    return;
+
                 }
             }
             if (!encontrarCliente)
@@ -250,7 +284,7 @@ namespace Obligatorio_PR2
             }
 
             bool huboError = false;
-
+            
 
             string validacionNombre = Utilities.ValidarSoloTexto(nombreCliente);
             if (validacionNombre != string.Empty)
@@ -259,6 +293,7 @@ namespace Obligatorio_PR2
                 mensajeError.Visible = true; 
                 huboError = true;
             }
+            nombreCliente = char.ToUpper(nombreCliente[0]) + nombreCliente.Substring(1).ToLower();
 
 
             string validacionApellido = Utilities.ValidarSoloTexto(apellidoCliente);
@@ -268,6 +303,8 @@ namespace Obligatorio_PR2
                 mensajeError.Visible = true; 
                 huboError = true;
             }
+            apellidoCliente = char.ToUpper(apellidoCliente[0]) + apellidoCliente.Substring(1).ToLower();
+
 
             string validacionTelefono = Utilities.ValidarSoloInt(telefonoCliente);
             if (validacionTelefono != string.Empty)
@@ -289,7 +326,7 @@ namespace Obligatorio_PR2
                 huboError = true;
             }
 
-            string emailCliente = txtEmailCliente.Text.Trim();
+           
             string cleanedEmail = emailCliente.Replace("&nbsp;", "").Trim();
             txtEmailCliente.Text = cleanedEmail;
             
@@ -311,7 +348,8 @@ namespace Obligatorio_PR2
                 BaseDeDatos.EditarCliente(clienteEncontrado.ci = cedulaCliente, clienteEncontrado.nombre = nombreCliente, clienteEncontrado.apellido = apellidoCliente, clienteEncontrado.direccion = direccionCliente, clienteEncontrado.telefono = numeroParseadoTelefono, clienteEncontrado.email = emailCliente.Trim());
 
                 ActualizarListas();
-
+                mensajeError.Text = "Cliente editado con éxito.";
+                mensajeError.Visible = true;
                 txtNombreCliente.Text = "";
                 txtApellidoCliente.Text = "";
                 txtCedulaCliente.Text = "";
@@ -406,6 +444,13 @@ namespace Obligatorio_PR2
             }
 
         }
+
+        protected void ApagarError()
+        {
+            mensajeError.Visible = false;
+        }
+
+
     }
 }
 
