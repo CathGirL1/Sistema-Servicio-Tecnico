@@ -18,8 +18,9 @@ namespace Obligatorio_PR2
 
                 pagClientes.DataSource = BaseDeDatos.listaClientes;
                 pagClientes.DataBind();
-
+                ApagarError();
             }
+
 
         }
 
@@ -249,7 +250,6 @@ namespace Obligatorio_PR2
             }
 
             bool huboError = false;
-            int numeroParseadoTelefono = 0;
 
 
             string validacionNombre = Utilities.ValidarSoloTexto(nombreCliente);
