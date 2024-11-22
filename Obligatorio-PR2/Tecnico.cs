@@ -2,14 +2,14 @@
 
 internal class Tecnico : Persona
 {
-    private string especialidad { get; set; }
-    static int id { get; set;}
-    static int contadorIds = 0;
+    public string especialidad { get; set; }
+    public int ID { get; set;}
+    public static int contadorIds = 0;
 
     public Tecnico(string pNombre, string pApellido, string pCi, string pEspecialidad) : base(pNombre, pApellido, pCi)
     {
         Tecnico.contadorIds++;
-        Tecnico.id = Tecnico.contadorIds;
+        this.ID = Tecnico.contadorIds;
         this.especialidad = pEspecialidad;
     }
 
@@ -23,11 +23,11 @@ internal class Tecnico : Persona
     }
     public int GetId()
     {
-        return id;
+        return ID;
     }
     public void SetId(int pId)
     {
-        id = pId;
+        this.ID = pId;
     }
 
 }

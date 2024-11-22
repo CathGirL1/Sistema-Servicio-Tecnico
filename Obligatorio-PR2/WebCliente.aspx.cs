@@ -1,4 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Drawing;
+using System.Linq;
 using System.Text.RegularExpressions;
 using System.Web.UI.WebControls;
 
@@ -10,7 +13,7 @@ namespace Obligatorio_PR2
 
         protected void Page_Load(object sender, EventArgs e)
         {
-      
+
             if (!IsPostBack)
             {
 
@@ -33,6 +36,7 @@ namespace Obligatorio_PR2
             int telefonoCliente = 0;
             string cedulaString;
             string cedulaConFormato;
+            bool huboErrorAlAgregar = false;
 
 
             // se pone el while para que una vez que entre el dato dentro del if lo valide, si el dato
@@ -150,13 +154,16 @@ namespace Obligatorio_PR2
             emailCliente = txtEmailCliente.Text.Trim();
 
 
+
+
             for (int x = 0; x < BaseDeDatos.listaClientes.Count; x++)
             {
                 if (Utilities.FormatearCedula(BaseDeDatos.listaClientes[x].GetCi()) == cedulaConFormato)
                 {
                     mensajeError.Text = "Ya hay un cliente con esta cédula.";
                     mensajeError.Visible = true;
-                    return;
+                    huboErrorAlAgregar = true;
+                    break;
 
 
                 }
@@ -167,27 +174,49 @@ namespace Obligatorio_PR2
                     return;
 
                 }
-                else if (BaseDeDatos.listaClientes[x].GetEmail() == emailCliente)
-                {
-                    mensajeError.Text = "Ya hay un cliente con este email.";
-                    mensajeError.Visible = true;
-                    return;
-                }
+
             }
 
-            BaseDeDatos.AgregarCliente(nombreCliente, apellidoCliente, cedulaConFormato, direccionCliente, telefonoCliente, emailCliente);
+            //al existir un cliente con el email vaciado y al agregar otro cliente con email vaciado no me deja por que me dice q el email ya existe
+            //incluso con el metodo validarEmail, o probando de manera suelta con un if(string.IsNullOrEmpty(emailCliente))  o if(string.Empty != emailCliente) dentro del if del for q valida el email si es repetido lo valida sip
+            // pero al agregar el segundo cliente con email vacio salta el mensaje de q esta agregado pero no se actualiza la grilla ya sea fuera del for o una validacion independiente. (esto no pasa en los precargados ya que ambos se pueden dejar en vacio el email)
 
-            ActualizarListas();
+            for (int x = 0; x < BaseDeDatos.listaClientes.Count; x++)
+            {
+                //if (!string.IsNullOrEmpty(emailCliente))
+                //{
+                    if (BaseDeDatos.listaClientes[x].GetEmail() == emailCliente)
+                    {
+                        mensajeError.Text = "Ya hay un cliente con este email.";
+                        mensajeError.Visible = true;
+                        return;
+                    }
+                //}
 
-            mensajeError.Text = "Cliente agregado con éxito.";
-            mensajeError.Visible = true;
+            }
 
-            txtNombreCliente.Text = "";
-            txtApellidoCliente.Text = "";
-            txtCedulaCliente.Text = "";
-            txtDireccionCliente.Text = "";
-            txtTelefonoCliente.Text = "";
-            txtEmailCliente.Text = "";
+
+
+            if (!huboErrorAlAgregar)
+            {
+
+                BaseDeDatos.AgregarCliente(nombreCliente, apellidoCliente, cedulaConFormato, direccionCliente, telefonoCliente, emailCliente.Trim());
+
+                ActualizarListas();
+
+                mensajeError.Text = "Cliente agregado con éxito.";
+                mensajeError.ForeColor = Color.Green;
+
+                mensajeError.Visible = true;
+
+                txtNombreCliente.Text = "";
+                txtApellidoCliente.Text = "";
+                txtCedulaCliente.Text = "";
+                txtDireccionCliente.Text = "";
+                txtTelefonoCliente.Text = "";
+                txtEmailCliente.Text = "";
+            }
+
 
         }
 
@@ -204,7 +233,7 @@ namespace Obligatorio_PR2
                 txtApellidoCliente.Text = fila.Cells[2].Text;
 
                 Label lblCedula = (Label)fila.FindControl("lblCedula");
-                if(lblCedula != null)
+                if (lblCedula != null)
                 {
                     txtCedulaCliente.Text = lblCedula.Text;
                 }
@@ -215,18 +244,18 @@ namespace Obligatorio_PR2
 
                 if (fila.Cells[5].Text == "&nbsp;")
                 {
-                    txtEmailCliente.Text = ""; 
+                    txtEmailCliente.Text = "";
                 }
 
                 ActualizarListas();
 
             }
-            
+
         }
 
         protected void clickGuardarCliente(object sender, EventArgs e)
         {
-            
+
             // ACA GUARDAR LO DE LAS TEXTBOX EN LA GRILLA, DONDE LA CEDULA SEA IGUAL.
             string cedulaCliente = txtCedulaCliente.Text.Trim();
             string nombreCliente = txtNombreCliente.Text.Trim();
@@ -235,17 +264,60 @@ namespace Obligatorio_PR2
             string telefonoCliente = txtTelefonoCliente.Text.Trim();
             string emailCliente = txtEmailCliente.Text.Trim();
             int numeroParseadoTelefono = 0;
-
+            bool huboError = false;
             bool encontrarCliente = false;
             // es del tipo cliente npor la referencia en memoria, si es null es que no hay ninguna referencia en memoria q se encuentre ese cliente con esa cedula.
-            Cliente clienteEncontrado = null; 
+            Cliente clienteEncontrado = null;
+
+
+
+
+            for (int i = 0; i < BaseDeDatos.listaClientes.Count; i++)
+            {
+
+                if (Utilities.FormatearCedula(BaseDeDatos.listaClientes[i].GetCi()) == Utilities.FormatearCedula(cedulaCliente))
+                {
+                    encontrarCliente = true;
+                    mensajeError.Text = "Ya hay un cliente con esta cédula.";
+                    mensajeError.Visible = true;
+                    // segun la posicion se gurada el cliente q se encontro
+                    clienteEncontrado = BaseDeDatos.listaClientes[i];
+                    break;
+                }
+
+                else if (BaseDeDatos.listaClientes[i].GetTelefono() == numeroParseadoTelefono)
+                {
+
+                    encontrarCliente = true;
+                    huboError = true;
+                    mensajeError.Text = "Ya hay un cliente con este telefono.";
+                    mensajeError.Visible = true;
+                    return;
+
+                }
+                else if (!string.IsNullOrEmpty(emailCliente) && BaseDeDatos.listaClientes[i].GetEmail() == emailCliente)
+                {
+                    encontrarCliente = true;
+                    huboError = true;
+                    mensajeError.Text = "Ya hay un cliente con este email.";
+                    mensajeError.Visible = true;
+                    return;
+
+                }
+            }
+            if (!encontrarCliente)
+            {
+                mensajeError.Text = "El cliente no existe";
+                mensajeError.Visible = true;
+                return;
+            }
 
 
             string validacionNombre = Utilities.ValidarSoloTexto(nombreCliente);
             if (validacionNombre != string.Empty)
             {
                 mensajeError.Text = validacionNombre;
-                mensajeError.Visible = true; 
+                mensajeError.Visible = true;
                 huboError = true;
             }
             nombreCliente = char.ToUpper(nombreCliente[0]) + nombreCliente.Substring(1).ToLower();
@@ -255,7 +327,7 @@ namespace Obligatorio_PR2
             if (validacionApellido != string.Empty)
             {
                 mensajeError.Text = validacionApellido;
-                mensajeError.Visible = true; 
+                mensajeError.Visible = true;
                 huboError = true;
             }
             apellidoCliente = char.ToUpper(apellidoCliente[0]) + apellidoCliente.Substring(1).ToLower();
@@ -265,10 +337,12 @@ namespace Obligatorio_PR2
             if (validacionTelefono != string.Empty)
             {
                 mensajeError.Text = validacionTelefono;
-                mensajeError.Visible = true; 
+                mensajeError.Visible = true;
                 huboError = true;
             }
-                numeroParseadoTelefono = int.Parse(telefonoCliente);
+
+            numeroParseadoTelefono = int.Parse(telefonoCliente);
+
 
             string validacionDireccion = Utilities.ValidarDireccion(direccionCliente);
             if (validacionDireccion != string.Empty)
@@ -278,10 +352,10 @@ namespace Obligatorio_PR2
                 huboError = true;
             }
 
-           
+
             string cleanedEmail = emailCliente.Replace("&nbsp;", "").Trim();
             txtEmailCliente.Text = cleanedEmail;
-            
+
             string validacionEmail = Utilities.ValidarEmail(emailCliente);
             if (!string.IsNullOrEmpty(validacionEmail)) //aca lo que se esta haciendo es que si el email no esta vacio o nulo basicamente si se muestra el msj error
             {
@@ -292,7 +366,7 @@ namespace Obligatorio_PR2
 
 
 
-            if (!huboError)          
+            if (!huboError)
             {
                 //los precargados son objetos y no solo campos q se debe de almacenar por lo tanto se utiliza el objeto.
                 // "clienteEncontrado.propiedad" para almacera lo que venga por parametro. 
@@ -301,6 +375,7 @@ namespace Obligatorio_PR2
 
                 ActualizarListas();
                 mensajeError.Text = "Cliente editado con éxito.";
+                mensajeError.ForeColor = Color.Green; 
                 mensajeError.Visible = true;
                 txtNombreCliente.Text = "";
                 txtApellidoCliente.Text = "";
@@ -322,6 +397,7 @@ namespace Obligatorio_PR2
                 BaseDeDatos.EliminarCliente(cedula);
 
                 mensajeError.Text = "Cliente eliminado correctamente.";
+                mensajeError.ForeColor = Color.Green; 
                 mensajeError.Visible = true;
 
                 ActualizarListas();
@@ -337,6 +413,12 @@ namespace Obligatorio_PR2
             pagClientes.DataBind();
             pagClientes.PageIndex = paginaActual;
 
+        }
+
+        protected void AsegurarActualizacionGrilla(object sender, GridViewPageEventArgs e)
+        {
+            pagClientes.PageIndex = e.NewPageIndex;
+            ActualizarListas();
         }
 
         protected void ClickBuscarCliente(object sender, EventArgs e)
@@ -367,6 +449,7 @@ namespace Obligatorio_PR2
                 {
                     filaGrilla.Visible = true;
                     encontrarCliente = true;
+
                 }
                 else
                 {
@@ -392,7 +475,9 @@ namespace Obligatorio_PR2
             }
             else
             {
-                mensajeError.Visible = false;
+                mensajeError.Text = "Cliente encontrado con éxito.";
+                mensajeError.Visible = true;
+                mensajeError.ForeColor = Color.Green;
             }
 
         }
@@ -406,4 +491,3 @@ namespace Obligatorio_PR2
     }
 }
 
-    

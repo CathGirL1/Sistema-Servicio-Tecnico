@@ -54,7 +54,7 @@
     <hr />
 
     <asp:TextBox ID="txtBuscarCliente" runat="server"></asp:TextBox><asp:Button ID="BotonBuscar" runat="server" Text="Buscar" OnClick ="ClickBuscarCliente" CausesValidation ="false"/>
-        <asp:GridView runat="server" ID="pagClientes" AutoGenerateColumns="False" Width="105%">
+        <asp:GridView runat="server" ID="pagClientes" AutoGenerateColumns="False" Width="105%" AllowPaging="true" OnPageIndexChanging="AsegurarActualizacionGrilla">
             <Columns>
                 <asp:BoundField DataField="ID" HeaderText="ID" />
                 <asp:BoundField DataField="Nombre" HeaderText="Nombre" />
@@ -64,9 +64,15 @@
                 <asp:Label ID="lblCedula" runat="server"
                     Text='<%# Obligatorio_PR2.Utilities.FormatearCedula(Eval("Ci").ToString()) %>'></asp:Label>
             </ItemTemplate>
-        </asp:TemplateField>
+
+    </asp:TemplateField>
         <asp:BoundField DataField="Telefono" HeaderText="Teléfono" />
-        <asp:BoundField DataField="Email" HeaderText="Email" />
+        <asp:TemplateField HeaderText="Email">
+            <ItemTemplate>
+                <asp:Label ID="lblEmail" runat="server" Text='<%# Eval("Email") == "" ? "Sin email" : Eval("Email") %>'></asp:Label>
+            </ItemTemplate>
+    </asp:TemplateField>
+
         <asp:BoundField DataField="Direccion" HeaderText="Dirección" />
         <asp:TemplateField>
             <ItemTemplate>

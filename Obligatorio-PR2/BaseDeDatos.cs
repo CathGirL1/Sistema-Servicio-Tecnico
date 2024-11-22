@@ -62,6 +62,8 @@ internal class BaseDeDatos
     static BaseDeDatos()
     {
         PreCargoClientes();
+        PreCargoTecnicos();
+     
     }
     public static void PreCargoClientes()
     {
@@ -69,6 +71,38 @@ internal class BaseDeDatos
         Cliente cliente2 = new Cliente("Cathy", "Sonderegger", "00010101", "que se acabe la politica", 12345678, "laCathy@gmail.com");
         listaClientes.Add(cliente1);
         listaClientes.Add(cliente2);
+        
+    }
+
+    
+    public static void PreCargoTecnicos()
+    {
+        Tecnico unTecnico1 = new Tecnico("Mati", "Delgado", "12345678", "Programador");
+        Tecnico unTecnico2 = new Tecnico("Cathy", "Sonderegger", "87654321", "Programador");
+        listaTecnicos.Add(unTecnico1);
+        listaTecnicos.Add(unTecnico2); 
+
+    }
+
+
+    public static void AgregarTecnico(string pNombre, string pApellido, string pCi, string pEspecialidad)
+    {
+        bool existeTecnico = false;
+
+        for (int x = 0; x < listaTecnicos.Count; x++)
+        {
+            if (Utilities.FormatearCedula(listaTecnicos[x].GetCi()) == Utilities.FormatearCedula(pCi))
+            {
+                existeTecnico = true;
+                break; 
+            }
+        }
+
+        if (!existeTecnico)
+        {
+            Tecnico unNuevoTecnico = new Tecnico(pNombre, pApellido, pCi, pEspecialidad);
+            listaTecnicos.Add(unNuevoTecnico); 
+        }
     }
 
 }
