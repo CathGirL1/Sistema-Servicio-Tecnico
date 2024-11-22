@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text.RegularExpressions;
 using System.Web.UI.WebControls;
 
@@ -174,7 +172,6 @@ namespace Obligatorio_PR2
                     mensajeError.Text = "Ya hay un cliente con este email.";
                     mensajeError.Visible = true;
                     return;
-
                 }
             }
 
@@ -244,48 +241,6 @@ namespace Obligatorio_PR2
             Cliente clienteEncontrado = null; 
 
 
-
-            for (int i = 0; i < BaseDeDatos.listaClientes.Count; i++)
-            {
-                
-                if (Utilities.FormatearCedula(BaseDeDatos.listaClientes[i].GetCi()) == Utilities.FormatearCedula(cedulaCliente))
-                {
-                    encontrarCliente = true;
-                    mensajeError.Text = "Ya hay un cliente con esta cédula.";
-                    mensajeError.Visible = true;
-                    // segun la posicion se gurada el cliente q se encontro
-                    clienteEncontrado = BaseDeDatos.listaClientes[i]; 
-                    break; 
-                }
-                
-                else if (BaseDeDatos.listaClientes[i].GetTelefono() == int.Parse(telefonoCliente))
-                {
-                   
-                    encontrarCliente = true;
-                    mensajeError.Text = "Ya hay un cliente con este telefono.";
-                    mensajeError.Visible = true;
-                    return;
-
-                }
-                else if (BaseDeDatos.listaClientes[i].GetEmail() == emailCliente)
-                {
-                    encontrarCliente = true;
-                    mensajeError.Text = "Ya hay un cliente con este email.";
-                    mensajeError.Visible = true;
-                    return;
-
-                }
-            }
-            if (!encontrarCliente)
-            { 
-                mensajeError.Text = "El cliente no existe";
-                mensajeError.Visible = true;
-                return;
-            }
-
-            bool huboError = false;
-            
-
             string validacionNombre = Utilities.ValidarSoloTexto(nombreCliente);
             if (validacionNombre != string.Empty)
             {
@@ -313,10 +268,7 @@ namespace Obligatorio_PR2
                 mensajeError.Visible = true; 
                 huboError = true;
             }
-            else
-            {
                 numeroParseadoTelefono = int.Parse(telefonoCliente);
-            }
 
             string validacionDireccion = Utilities.ValidarDireccion(direccionCliente);
             if (validacionDireccion != string.Empty)
