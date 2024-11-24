@@ -194,6 +194,8 @@
     </Compile>
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="BaseDeDatos.cs" />
+    <Compile Include="ComentarioTecnico.cs" />
+    <Compile Include="OrdenTrabajo.cs" />
     <Compile Include="Cliente.cs" />
     <Compile Include="Contact.aspx.cs">
       <DependentUpon>Contact.aspx</DependentUpon>
