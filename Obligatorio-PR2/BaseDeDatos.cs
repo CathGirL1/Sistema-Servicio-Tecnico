@@ -158,6 +158,13 @@ internal class BaseDeDatos
             }
         }
     }
+
+    public void AgregarComentario(ComentarioTecnico pComentario)
+    {
+        listaComentarioTecnico.Add(pComentario);
+    }
+
+
 }
 
 

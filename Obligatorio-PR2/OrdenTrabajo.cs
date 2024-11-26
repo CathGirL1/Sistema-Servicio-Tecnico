@@ -44,7 +44,10 @@ public class OrdenTrabajo
         // en editar el estado puede cambiar pero en el agregar no, descripcion: y la fecha no por que viene predeterminada en hora actual. 
         // en la lista se veria con: numero orden(incrementado),  la cedula tecnico, cedula cliente, estado de orden, descripcion, fecha de orden.
 
-
+        // para la web form asp de orden de trabajo, pasar la fecha a formato fecha para que no aparezca la hora 
+        // droplist para el estado las opciones. 
+        // que se vea la grilla. 
+        
     }
 
 
