@@ -65,6 +65,7 @@ internal class BaseDeDatos
     {
         PreCargoClientes();
         PreCargoTecnicos();
+        PreCargoOrdeness(); 
 
     }
     public static void PreCargoClientes()
@@ -86,6 +87,14 @@ internal class BaseDeDatos
 
     }
 
+    public static void PreCargoOrdeness()
+    {
+        OrdenTrabajo ordenUno = new OrdenTrabajo("El problema es..", "87654321", "98765432");
+        OrdenTrabajo OrdenDos = new OrdenTrabajo("Se rompió..", "34827451", "45642345");
+        listaOrdenTrabajo.Add(ordenUno);
+        listaOrdenTrabajo.Add(OrdenDos);
+
+    }
 
     public static void AgregarTecnico(string pNombre, string pApellido, string pCi, string pEspecialidad)
     {
@@ -107,8 +116,34 @@ internal class BaseDeDatos
         }
     }
 
+    public static void EliminarTecnico(string pCi)
+    {
+        for (int x = 0; x < listaTecnicos.Count; x++)
+        {
 
-    public void AgregarOrdenTrabajo(string pDescripcionProblema, string pCedulaCliente, string pCedulaTecnico)
+            if (Utilities.FormatearCedula(listaTecnicos[x].GetCi()) == Utilities.FormatearCedula(pCi))
+            {
+                listaTecnicos.RemoveAt(x);
+                break;
+            }
+        }
+    }
+    public static void EditarTecnico(string pNombre, string pApellido, string pCi, string pEspecialidad)
+    {
+        for (int x = 0; x < listaTecnicos.Count; x++)
+        {
+            if (listaClientes[x].GetCi() == pCi)
+            {
+                listaTecnicos[x].nombre = pNombre;
+                listaTecnicos[x].apellido = pApellido;
+                listaTecnicos[x].ci = pApellido;
+                listaTecnicos[x].especialidad = pApellido;
+                break;
+            }
+        }
+
+    }
+    public static void AgregarOrdenTrabajo(string pDescripcionProblema, string pCedulaCliente, string pCedulaTecnico, string pEstado = "Pendiente")
     {
         Tecnico unTecnicoEncontrado = null;
         Cliente unClienteEncontrado = null;
@@ -121,10 +156,7 @@ internal class BaseDeDatos
                 unClienteEncontrado = listaClientes[x];
                 break; 
             }
-
-
         }
-
         for (int x = 0; x < listaTecnicos.Count; x++)
         {
 
@@ -133,21 +165,17 @@ internal class BaseDeDatos
                 unTecnicoEncontrado = listaTecnicos[x];
                 break;
             }
-
-
         }
-
-        // si el cliente y el tecnico fueron encontrados en memoria o sea no es null se agrega el pedido.
-
         if (unClienteEncontrado != null && unTecnicoEncontrado != null)
         {
-            OrdenTrabajo unNuevoOrdenTrabajo = new OrdenTrabajo(pDescripcionProblema, pCedulaCliente, pCedulaTecnico);
+            string estadoInicial = "Pendiente";
+            OrdenTrabajo unNuevoOrdenTrabajo = new OrdenTrabajo(pDescripcionProblema, pCedulaCliente, pCedulaTecnico, estadoInicial);
             listaOrdenTrabajo.Add(unNuevoOrdenTrabajo); 
         }
     }
 
 
-    public void EditarEstado(int pNumeroOrden, string pEstado)
+    public static void EditarEstado(int pNumeroOrden, string pEstado)
     {
         for (int y = 0; y < listaOrdenTrabajo.Count; y++)
         {
@@ -159,10 +187,38 @@ internal class BaseDeDatos
         }
     }
 
-    public void AgregarComentario(ComentarioTecnico pComentario)
+    public static void AgregarComentario(ComentarioTecnico pComentario)
     {
         listaComentarioTecnico.Add(pComentario);
     }
+    // metodos para validar si tecnico y cliente existenn si es asi se agrega el pedido. 
+    public static bool ValidarCedulaCliente(List<Cliente> pListaCliente, string pCedula)
+    {
+        for (int x = 0; x < pListaCliente.Count; x++)
+        {
+            if (Utilities.FormatearCedula(pListaCliente[x].GetCi()) == Utilities.FormatearCedula(pCedula))
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    public static bool ValidarCedulaTecnico(List<Tecnico> pListaTecnico, string pCedula)
+    {
+        for (int x = 0; x < pListaTecnico.Count; x++)
+        {
+            if (Utilities.FormatearCedula(pListaTecnico[x].GetCi()) == Utilities.FormatearCedula(pCedula))
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+
 
 
 }

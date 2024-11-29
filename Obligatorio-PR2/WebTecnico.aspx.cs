@@ -16,7 +16,8 @@ namespace Obligatorio_PR2
             if (!IsPostBack)
             {
                 pagTecnicos.DataSource = BaseDeDatos.listaTecnicos;
-                pagTecnicos.DataBind(); 
+                pagTecnicos.DataBind();
+                ApagarError(); 
             }
         }
 
@@ -205,5 +206,127 @@ namespace Obligatorio_PR2
                 mensajeError.ForeColor = Color.Green;
             }
         }
+
+
+        protected void clickEditarTecnico(object sender, CommandEventArgs e)
+        {
+
+            if (e.CommandName == "EditarTecnico")
+            {
+                int filaIndice = Convert.ToInt32(e.CommandArgument);
+
+                GridViewRow fila = pagTecnicos.Rows[filaIndice];
+
+                txtNombreTecnico.Text = fila.Cells[1].Text;
+                txtApellidoTecnico.Text = fila.Cells[2].Text;
+                txtEspecialidadTecnico.Text = fila.Cells[3].Text;
+
+                Label lblCedula = (Label)fila.FindControl("lblCedula");
+                if (lblCedula != null)
+                {
+                    txtCedulaTecnico.Text = lblCedula.Text;
+                }
+
+                ActualizarListas();
+            }
+
+        }
+
+        protected void clickEliminarTecnico(object sender, CommandEventArgs e)
+        {
+
+            if (e.CommandName == "EliminarTecnico")
+            {
+                string cedula = e.CommandArgument.ToString();
+
+                BaseDeDatos.EliminarTecnico(cedula);
+
+                mensajeError.Text = "Técnico eliminado correctamente.";
+                mensajeError.ForeColor = Color.Green;
+                mensajeError.Visible = true;
+
+                ActualizarListas();
+            }
+
+            txtCedulaTecnico.Text = "";
+        }
+
+        protected void clickGuardarTecnico(object sender, EventArgs e)
+        {
+
+            string cedulaTecnico = txtCedulaTecnico.Text.Trim();
+            string nombreTecnico = txtNombreTecnico.Text.Trim();
+            string apellidoTecnico = txtApellidoTecnico.Text.Trim();
+            string especialidadTecnico = txtEspecialidadTecnico.Text.Trim();
+            bool huboError = false;
+            bool encontrarTecnico = false;
+            Tecnico tecnicoEncontrado = null;
+
+            for (int i = 0; i < BaseDeDatos.listaTecnicos.Count; i++)
+            {
+
+                if (Utilities.FormatearCedula(BaseDeDatos.listaTecnicos[i].GetCi()) == Utilities.FormatearCedula(cedulaTecnico))
+                {
+                    encontrarTecnico = true;
+                    mensajeError.Text = "Ya hay un técnico con esta cédula.";
+                    mensajeError.Visible = true;
+                    mensajeError.ForeColor = Color.Red;
+
+                    tecnicoEncontrado = BaseDeDatos.listaTecnicos[i];
+                    break;
+                }
+            }
+
+            if (!encontrarTecnico)
+            {
+                mensajeError.Text = "El cliente no existe";
+                mensajeError.Visible = true;
+                mensajeError.ForeColor = Color.Red;
+                return;
+            }
+
+            string validacionNombre = Utilities.ValidarSoloTexto(nombreTecnico);
+            if (validacionNombre != string.Empty)
+            {
+                mensajeError.Text = validacionNombre;
+                mensajeError.Visible = true;
+                mensajeError.ForeColor = Color.Red;
+                huboError = true;
+            }
+            nombreTecnico = char.ToUpper(nombreTecnico[0]) + nombreTecnico.Substring(1).ToLower();
+
+
+            string validacionApellido = Utilities.ValidarSoloTexto(apellidoTecnico);
+            if (validacionApellido != string.Empty)
+            {
+                mensajeError.Text = validacionApellido;
+                mensajeError.Visible = true;
+                mensajeError.ForeColor = Color.Red;
+                huboError = true;
+            }
+            apellidoTecnico = char.ToUpper(apellidoTecnico[0]) + apellidoTecnico.Substring(1).ToLower();
+
+            if (!huboError)
+            {
+
+                BaseDeDatos.EditarTecnico(tecnicoEncontrado.nombre = nombreTecnico, tecnicoEncontrado.apellido = apellidoTecnico, tecnicoEncontrado.ci = cedulaTecnico, tecnicoEncontrado.especialidad = especialidadTecnico);
+
+                ActualizarListas();
+                mensajeError.Text = "Cliente editado con éxito.";
+                mensajeError.ForeColor = Color.Green;
+                mensajeError.Visible = true;
+                txtNombreTecnico.Text = "";
+                txtApellidoTecnico.Text = "";
+                txtCedulaTecnico.Text = "";
+                txtEspecialidadTecnico.Text = "";
+            }
+        }
+
+        protected void ApagarError()
+        {
+            mensajeError.Visible = false;
+        }
+
     }
+
 }

@@ -22,7 +22,6 @@ namespace Obligatorio_PR2
                 ApagarError();
             }
 
-
         }
 
         protected void clickAgregarCliente(object sender, EventArgs e)
@@ -152,8 +151,6 @@ namespace Obligatorio_PR2
 
 
             emailCliente = txtEmailCliente.Text.Trim();
-
-
 
 
             for (int x = 0; x < BaseDeDatos.listaClientes.Count; x++)
