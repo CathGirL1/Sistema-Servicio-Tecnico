@@ -149,6 +149,7 @@
     <Content Include="Content\bootstrap-grid.min.css.map" />
     <Content Include="Content\bootstrap-grid.css.map" />
     <Content Include="WebCliente.aspx" />
+    <Content Include="WebComentarios.aspx" />
     <Content Include="WebOrdenTrabajo.aspx" />
     <Content Include="WebTecnico.aspx" />
     <None Include="Scripts\jquery-3.7.0.intellisense.js" />
@@ -246,6 +247,13 @@
     </Compile>
     <Compile Include="WebCliente.aspx.designer.cs">
       <DependentUpon>WebCliente.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebComentarios.aspx.cs">
+      <DependentUpon>WebComentarios.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebComentarios.aspx.designer.cs">
+      <DependentUpon>WebComentarios.aspx</DependentUpon>
     </Compile>
     <Compile Include="WebOrdenTrabajo.aspx.cs">
       <DependentUpon>WebOrdenTrabajo.aspx</DependentUpon>

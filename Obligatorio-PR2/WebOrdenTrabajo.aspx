@@ -1,5 +1,6 @@
 ﻿<%@ Page Title="OrdenTrabajo" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="WebOrdenTrabajo.aspx.cs" Inherits="Obligatorio_PR2.WebOrdenTrabajo" %>
 
+
 <asp:Content ID="Content3" ContentPlaceHolderID="MainContent" runat="server">
     &nbsp; 
 
@@ -33,11 +34,11 @@
     <asp:TextBox ID="txtBuscarOrdenTrabajo" runat="server"></asp:TextBox><asp:Button ID="BotonBuscar" runat="server" Text="Buscar Orden" OnClick="clickBuscarOrdenTrabajo" CausesValidation="false" />
     <asp:GridView runat="server" ID="pagOrdenes" AutoGenerateColumns="False" Width="105%" AllowPaging="true" OnPageIndexChanging="AsegurarActualizacionGrilla">
         <Columns>
-          <asp:TemplateField HeaderText="ID Orden">
+            <asp:TemplateField HeaderText="ID Orden">
                 <ItemTemplate>
                     <asp:Label ID="numeroOrdenRederencia" runat="server" Text='<%# Eval("numeroOrden") %>'></asp:Label>
                 </ItemTemplate>
-          </asp:TemplateField>
+            </asp:TemplateField>
 
             <asp:TemplateField HeaderText="CI Técnico">
                 <ItemTemplate>
@@ -52,23 +53,42 @@
                 </ItemTemplate>
             </asp:TemplateField>
 
-      <asp:TemplateField HeaderText="Estado">
-        <ItemTemplate>
-            <asp:DropDownList ID="ddlOpcionesEstado" runat="server" 
-                SelectedValue='<%# Eval("Estado")  ?? "Pendiente" %>' 
-                OnSelectedIndexChanged="seleccionarOpcionDropList" 
-                AutoPostBack="true">
-                <asp:ListItem Text="Pendiente" Value="Pendiente" />
-                <asp:ListItem Text="En progreso" Value="En progreso" />
-                <asp:ListItem Text="Completada" Value="Completada" />
-            </asp:DropDownList>
-      </ItemTemplate>
-    </asp:TemplateField>
+            <asp:TemplateField HeaderText="Estado">
+                <ItemTemplate>
+                    <asp:DropDownList ID="ddlOpcionesEstado" runat="server"
+                        SelectedValue='<%# Eval("Estado")  ?? "Pendiente" %>'
+                        OnSelectedIndexChanged="seleccionarOpcionDropList"
+                        AutoPostBack="true">
+                        <asp:ListItem Text="Pendiente" Value="Pendiente" />
+                        <asp:ListItem Text="En progreso" Value="En progreso" />
+                        <asp:ListItem Text="Completada" Value="Completada" />
+                    </asp:DropDownList>
+                </ItemTemplate>
+            </asp:TemplateField>
 
             <asp:BoundField DataField="descripcionProblema" HeaderText="Descripción" />
             <asp:BoundField DataField="fechaAutomatica" HeaderText="Fecha"
                 DataFormatString="{0:dd/MM/yyyy}" HtmlEncode="false" />
+            <asp:TemplateField>
+                <ItemTemplate>
+                    <div class="GridViewButtonContainer">
+
+                        <asp:Button ID="botonVerComentarios" runat="server" Text="Ver comentarios" ForeColor="Blue"
+                            CommandName="VerComentario" CommandArgument='<%# Container.DataItemIndex %>'
+                            OnCommand="clickVerComentarios" CausesValidation="false" />
+                    </div>
+                </ItemTemplate>
+            </asp:TemplateField>
         </Columns>
     </asp:GridView>
     <asp:Label ID="mensajeError" runat="server" Visible="false" ForeColor="Red"></asp:Label>
+    <hr />
+    <div>
+        <h4>Agregar comentario:</h4>
+        <br />
+    </div>
+
+    <br />
+
 </asp:Content>
+

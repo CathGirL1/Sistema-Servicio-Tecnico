@@ -15,61 +15,119 @@ namespace Obligatorio_PR2
         {
             if (!IsPostBack)
             {
+             
                 pagOrdenes.DataSource = BaseDeDatos.listaOrdenTrabajo;
                 pagOrdenes.DataBind();
-                ApagarError(); 
-                
-            }
-            //if (!IsPostBack)
-            //{
-            //    // se carga la grilla con las ordenes del tecnico correspondiente si existe el tecnico logeado
-            //    if (Session["Tecnico"] != null)
-            //    {
-            //        CargarOrdenesDeTrabajo();
-            //    }
-            //    else
-            //    {
-            //        // si no esta registrado el tecnico, mostramos el formulario de login con mesnaje de error
-            //        mensajeError.Text = "el tecnico no existe";
-            //        mensajeError.ForeColor = Color.Red;
-            //        mensajeError.Visible = true;
-            //    }
+                ApagarError();
 
-            //}
+                // se carga la grilla con las ordenes del tecnico correspondiente si existe el tecnico logeado
+                //if (Session["Tecnico"] != null)
+                //{
+                //    CargarOrdenesDeTrabajo();
+                //}
+                //    // si no esta registrado el tecnico, mostramos el formulario de login con mesnaje de error
+                //    mensajeError.Text = "el tecnico no esta registrado.";
+                //    mensajeError.ForeColor = Color.Red;
+                //    mensajeError.Visible = true;
+                //}
+            }
         }
 
-        //private void CargarOrdenesDeTrabajo()
+        protected void CargarOrdenesDeTrabajo()
+        {
+            // se obtiene el tecnico desde la sesion
+            Tecnico tecnico = (Tecnico)Session["Tecnico"];
+             
+
+            List<OrdenTrabajo> ordenesDelTecnicoEncontrado = new List<OrdenTrabajo>();
+
+            // aca se busca la cedula del tecnico en la lista de las ordenes que coincidan con un tecnico
+            // si existe, se guarda la lista de pedidos de ese tecnico
+
+            for (int x = 0; x < BaseDeDatos.listaOrdenTrabajo.Count; x++)
+            {
+                  if (Utilities.FormatearCedula(BaseDeDatos.listaOrdenTrabajo[x].GetCedulaTecnico()) == Utilities.FormatearCedula(tecnico.GetCi()))
+                  {
+                      ordenesDelTecnicoEncontrado.Add(BaseDeDatos.listaOrdenTrabajo[x]);
+                      
+                  }
+            }
+
+            if (ordenesDelTecnicoEncontrado.Count > 0)
+            {
+                // si se encontro el tecnico se ponen los pedidos del tecnico en la grilla
+                pagOrdenes.DataSource = ordenesDelTecnicoEncontrado;
+                pagOrdenes.DataBind();
+            }
+            else
+            {
+                pagOrdenes.DataSource = null; // limpia la grilla
+                pagOrdenes.DataBind();
+                mensajeError.Text = "No tienes órdenes registradas.";
+                mensajeError.Visible = true;
+            }
+
+        }
+
+        //protected void botonLoginClick(object sender, EventArgs e)
         //{
-        //    // se obtiene el tecnico desde la sesion
-        //    Tecnico tecnico = (Tecnico)Session["Tecnico"];
-
-        //    List<OrdenTrabajo> ordenesDelTecnicoEncontrado = new List<OrdenTrabajo>();
-
-        //    // aca se busca la cedula del tecnico en la lista de las ordenes que coincidan con un tecnico
-        //    // si existe, se guarda la lista de pedidos de ese tecnico
-
-        //    for (int x = 0; x < BaseDeDatos.listaOrdenTrabajo.Count; x++)
+        //    string cedulaTecnicoLogin = txtLoginCedulaTecnico.Text; 
+        //    if (string.IsNullOrEmpty(cedulaTecnicoLogin))
         //    {
-        //        if (Utilities.FormatearCedula(BaseDeDatos.listaOrdenTrabajo[x].GetCedulaTecnico()) == Utilities.FormatearCedula(tecnico.GetCi()))
-        //        {
-        //            ordenesDelTecnicoEncontrado.Add(BaseDeDatos.listaOrdenTrabajo[x]);
-        //            break;
-        //        }
+        //        mensajeError.Text = "Debe agregar una cédula.";
+        //        mensajeError.Visible = true;
+               
+        //        return;
         //    }
-        //    if (ordenesDelTecnicoEncontrado.Count > 0)
+
+        //    Regex cedulaFormatoCedulaTecnicoLogin = new Regex(@"^(\d{1,2}[-\.]?\d{3}[-\.]?\d{3}|\d{6,8})$");
+        //    if (!cedulaFormatoCedulaTecnicoLogin.IsMatch(cedulaTecnicoLogin))
         //    {
-        //        // si se encontro el tecnico se ponen los pedidos del tecnico en la grilla
-        //        pagOrdenes.DataSource = ordenesDelTecnicoEncontrado;
-        //        pagOrdenes.DataBind();
+        //        mensajeError.Text = "La cédula debe de ser numérica, opcionalmente con guiones o puntos.";
+        //        mensajeError.Visible = true;
+        //        return;
+        //    }
+
+        //    string cedulaConFormatoTLogin = Utilities.FormatearCedula(cedulaTecnicoLogin);
+
+            
+        //    Tecnico unTecnico = BuscarTecnico(cedulaConFormatoTLogin); 
+
+           
+
+        //    if (unTecnico != null)
+        //    {
+        //        // si el tecnico existe y no es null, lo almacenamos en la sesion
+        //        Session["Tecnico"] = unTecnico;
+        //        // se cargan las ordenes del tecnico encontrado
+        //        CargarOrdenesDeTrabajo();
+        //        // se oculta el login
+
         //    }
         //    else
         //    {
-        //        mensajeError.Text = "No tienes ordenes registradas";
-        //        mensajeError.ForeColor = Color.Red;
-        //        mensajeError.Visible = true;
+        //        // si no se encuentra el tecnico, mostramos un mensaje de error
+        //        mensajeErrorLogin.Text = "Cédula incorrecta. verifique que esta cedula aeste registrada.";
+        //        mensajeErrorLogin.Visible = true;
         //    }
 
+        //    txtLoginCedulaTecnico.Text = "";
         //}
+
+        private Tecnico BuscarTecnico(string pCedulaTecnico)
+        {
+           
+            for (int x = 0; x < BaseDeDatos.listaTecnicos.Count; x++)
+            {
+                if (Utilities.FormatearCedula(BaseDeDatos.listaTecnicos[x].GetCi()) == Utilities.FormatearCedula(pCedulaTecnico))
+                {
+                    return BaseDeDatos.listaTecnicos[x]; 
+                    
+                }
+            }
+            return null;  
+        }
+
 
         protected void ActualizarListas()
         {
@@ -251,6 +309,25 @@ namespace Obligatorio_PR2
                 mensajeError.ForeColor = Color.Green;
                 mensajeError.Visible = true;
             }
+            
+
+        }
+
+        protected void clickVerComentarios(object sender, EventArgs e)
+        {
+            //Para redirigir desde ordenTrabajo a la ventana comentarios.
+            int indiceOrden = Int32.Parse(((Button)sender).CommandArgument);
+            int numeroOrden = (BaseDeDatos.listaOrdenTrabajo[indiceOrden]).numeroOrden;
+            Response.Redirect("~/WebComentarios.aspx?numeroOrden=" + numeroOrden);
+
+
+        }
+
+        protected void clickGuardarComentario(object sender, EventArgs e)
+        {
+            string unComentario = txtComentarioOrden.Text; 
+            string unIdOrden = txtBuscarOrdenTrabajo.Text;
+            string validarIdOrden = Utilities.ValidarSoloInt(unIdOrden); 
             
 
         }
