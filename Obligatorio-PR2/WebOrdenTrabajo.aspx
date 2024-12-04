@@ -83,12 +83,6 @@
     </asp:GridView>
     <asp:Label ID="mensajeError" runat="server" Visible="false" ForeColor="Red"></asp:Label>
     <hr />
-    <div>
-        <h4>Agregar comentario:</h4>
-        <br />
-    </div>
-
-    <br />
 
 </asp:Content>
 

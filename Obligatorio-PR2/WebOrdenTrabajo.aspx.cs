@@ -323,14 +323,14 @@ namespace Obligatorio_PR2
 
         }
 
-        protected void clickGuardarComentario(object sender, EventArgs e)
-        {
-            string unComentario = txtComentarioOrden.Text; 
-            string unIdOrden = txtBuscarOrdenTrabajo.Text;
-            string validarIdOrden = Utilities.ValidarSoloInt(unIdOrden); 
+        //protected void clickGuardarComentario(object sender, EventArgs e)
+        //{
+        //    string unComentario = txtComentarioOrden.Text; 
+        //    string unIdOrden = txtBuscarOrdenTrabajo.Text;
+        //    string validarIdOrden = Utilities.ValidarSoloInt(unIdOrden); 
             
 
-        }
+        //}
 
         protected void ApagarError()
         {

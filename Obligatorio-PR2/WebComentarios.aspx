@@ -2,24 +2,23 @@
 
 <asp:Content ID="Content4" ContentPlaceHolderID="MainContent" runat="server">
     &nbsp;
+    <h6>Agregar comentarios a la orden #<asp:Label ID="lblNumeroOrden" runat="server"></asp:Label>:</h6>
     <div style="display: flex; gap: 10px;">
         <asp:Label ID="label1" runat="server" Text="Comentario:"></asp:Label>
-        <asp:TextBox ID="txtComentarioOrden" runat="server" TextMode="MultiLine" Rows="4"></asp:TextBox>k
-    </div>
-    <br />
-    <div style="display: flex; gap: 12px;">
-        <asp:Label ID="label2" runat="server" Text="ID orden:"></asp:Label>
-        <asp:TextBox ID="txtIdOrden" runat="server"></asp:TextBox>
+        <asp:TextBox ID="txtComentarioOrden" runat="server" TextMode="MultiLine" Rows="4"></asp:TextBox>
     </div>
     <br />
     <div>
         <asp:Button ID="clickAgregarC" runat="server" Text="Guardar comentario" OnClick="clickGuardarComentario" CausesValidation="true"></asp:Button>
     </div>
+     <asp:Label ID="lblError" runat="server" ForeColor="Red" Visible="false"></asp:Label>
+    <hr />
+
     <div>
         <asp:Repeater ID="rptComentarios" runat="server">
             <ItemTemplate>
                 <div class="comentario">
-                    <strong><%# Eval("numeroOrden") %></strong>
+                    - <%# Eval("textoComentario") %> (Fecha: <%# Eval("fechaComentario", "{0:dd/MM/yyyy}") %>)
                 </div>
             </ItemTemplate>
         </asp:Repeater>

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Obligatorio_PR2;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -12,7 +13,7 @@ public class OrdenTrabajo
     public string estado { get; set; }
     public string cedulaTecnico { get; set; }
     public string cedulaCliente { get; set; }
-
+    public List<Comentario> Comentarios { get; set; } = new List<Comentario>();
 
     //List<string> listaComentariosTecnico { get; set; }
 
