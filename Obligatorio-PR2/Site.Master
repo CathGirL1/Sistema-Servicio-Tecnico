@@ -53,6 +53,7 @@
                         <li class="nav-item"><a class="nav-link" runat="server" href="~/WebCliente.aspx">Cliente</a></li> 
                         <li class="nav-item"><a class="nav-link" runat="server" href="~/WebTecnico.aspx">Tecnico</a></li>
                         <li class="nav-item"><a class="nav-link" runat="server" href="~/WebOrdenTrabajo.aspx">Orden de trabajo</a></li>
+                        <li class="nav-item"><a class="nav-link" runat="server" href="~/WebBusquedaOrden.aspx">Busqueda del orden</a></li>
                             
                     </ul>
                 </div>

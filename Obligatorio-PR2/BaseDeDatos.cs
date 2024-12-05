@@ -70,8 +70,8 @@ internal class BaseDeDatos
     }
     public static void PreCargoClientes()
     {
-        Cliente cliente1 = new Cliente("Matias", "Delgado", "0000000", "aguante la calle pou", 09873632, "elMati@gmail.com");
-        Cliente cliente2 = new Cliente("Cathy", "Sonderegger", "00010101", "que se acabe la politica", 12345678, "laCathy@gmail.com");
+        Cliente cliente1 = new Cliente("Matias", "otro apellido de matias", "0000000", "peñaroool", 09873632, "elMati@gmail.com");
+        Cliente cliente2 = new Cliente("Catherine", "Gomez", "00010101", "nacionaaaal", 12345678, "laCathy@gmail.com");
         listaClientes.Add(cliente1);
         listaClientes.Add(cliente2);
 
@@ -89,8 +89,8 @@ internal class BaseDeDatos
 
     public static void PreCargoOrdeness()
     {
-        OrdenTrabajo ordenUno = new OrdenTrabajo("El problema es..", "87654321", "98765432");
-        OrdenTrabajo OrdenDos = new OrdenTrabajo("Se rompió..", "34827451", "45642345");
+        OrdenTrabajo ordenUno = new OrdenTrabajo("El problema es..", "0000000", "12345678");
+        OrdenTrabajo OrdenDos = new OrdenTrabajo("Se rompió..", "00010101", "87654321");
         listaOrdenTrabajo.Add(ordenUno);
         listaOrdenTrabajo.Add(OrdenDos);
 
