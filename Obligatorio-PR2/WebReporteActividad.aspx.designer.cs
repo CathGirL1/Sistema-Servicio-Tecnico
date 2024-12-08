@@ -11,17 +11,26 @@ namespace Obligatorio_PR2
 {
 
 
-    public partial class WebBusquedaOrden
+    public partial class WebReporteActividad
     {
 
         /// <summary>
-        /// Control txtBuscarOrdenTrabajo.
+        /// Control labelCedulaBuscada.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtBuscarOrdenTrabajo;
+        protected global::System.Web.UI.WebControls.Label labelCedulaBuscada;
+
+        /// <summary>
+        /// Control txtCedula.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtCedula;
 
         /// <summary>
         /// Control BotonBuscar.
@@ -33,112 +42,22 @@ namespace Obligatorio_PR2
         protected global::System.Web.UI.WebControls.LinkButton BotonBuscar;
 
         /// <summary>
-        /// Control panelDetalles.
+        /// Control lblResultado.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel panelDetalles;
+        protected global::System.Web.UI.WebControls.Label lblResultado;
 
         /// <summary>
-        /// Control txtNumeroOrden.
+        /// Control panelResultado.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label txtNumeroOrden;
-
-        /// <summary>
-        /// Control txtDescripcionOrden.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label txtDescripcionOrden;
-
-        /// <summary>
-        /// Control txtEstadoOrden.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label txtEstadoOrden;
-
-        /// <summary>
-        /// Control txtFechaOrden.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label txtFechaOrden;
-
-        /// <summary>
-        /// Control rptComentarios.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Repeater rptComentarios;
-
-        /// <summary>
-        /// Control txtNombreCliente.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label txtNombreCliente;
-
-        /// <summary>
-        /// Control txtApellidoCliente.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label txtApellidoCliente;
-
-        /// <summary>
-        /// Control txtCedulaCliente.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label txtCedulaCliente;
-
-        /// <summary>
-        /// Control txtDireccionCliente.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label txtDireccionCliente;
-
-        /// <summary>
-        /// Control txtTelefonoCliente.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label txtTelefonoCliente;
-
-        /// <summary>
-        /// Control txtEmailCliente.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label txtEmailCliente;
+        protected global::System.Web.UI.WebControls.Panel panelResultado;
 
         /// <summary>
         /// Control txtNombreTecnico.
@@ -168,21 +87,48 @@ namespace Obligatorio_PR2
         protected global::System.Web.UI.WebControls.Label txtCedulaTecnico;
 
         /// <summary>
-        /// Control txtEspecialidadTecnico.
+        /// Control txtOrdenesTotales.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label txtEspecialidadTecnico;
+        protected global::System.Web.UI.WebControls.Label txtOrdenesTotales;
 
         /// <summary>
-        /// Control mensajeErrorBusquedaOrden.
+        /// Control txtEstadoPendiente.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label mensajeErrorBusquedaOrden;
+        protected global::System.Web.UI.WebControls.Label txtEstadoPendiente;
+
+        /// <summary>
+        /// Control txtEstadoEnProgreso.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label txtEstadoEnProgreso;
+
+        /// <summary>
+        /// Control txtEstadoCompletadas.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label txtEstadoCompletadas;
+
+        /// <summary>
+        /// Control mensajeErrorBusquedaTecnico.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label mensajeErrorBusquedaTecnico;
     }
 }

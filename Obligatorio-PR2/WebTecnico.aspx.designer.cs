@@ -129,7 +129,7 @@ namespace Obligatorio_PR2
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button clickAgrTecnico;
+        protected global::System.Web.UI.WebControls.LinkButton clickAgrTecnico;
 
         /// <summary>
         /// Control clickGrdTecnico.
@@ -138,7 +138,7 @@ namespace Obligatorio_PR2
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button clickGrdTecnico;
+        protected global::System.Web.UI.WebControls.LinkButton clickGrdTecnico;
 
         /// <summary>
         /// Control txtBuscarTecnico.
@@ -156,7 +156,7 @@ namespace Obligatorio_PR2
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button BotonBuscar;
+        protected global::System.Web.UI.WebControls.LinkButton BotonBuscar;
 
         /// <summary>
         /// Control pagTecnicos.

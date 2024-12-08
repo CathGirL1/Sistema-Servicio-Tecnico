@@ -15,21 +15,15 @@ namespace Obligatorio_PR2
         {
             if (!IsPostBack)
             {
-             
+                // Llenar el GridView
                 pagOrdenes.DataSource = BaseDeDatos.listaOrdenTrabajo;
                 pagOrdenes.DataBind();
-                ApagarError();
 
-                // se carga la grilla con las ordenes del tecnico correspondiente si existe el tecnico logeado
-                //if (Session["Tecnico"] != null)
-                //{
-                //    CargarOrdenesDeTrabajo();
-                //}
-                //    // si no esta registrado el tecnico, mostramos el formulario de login con mesnaje de error
-                //    mensajeError.Text = "el tecnico no esta registrado.";
-                //    mensajeError.ForeColor = Color.Red;
-                //    mensajeError.Visible = true;
-                //}
+                // Guardar la lista de ordenes en la sesión
+                Session["Ordenes"] = BaseDeDatos.listaOrdenTrabajo;
+
+                // Apagar error si es necesario
+                ApagarError();
             }
         }
 

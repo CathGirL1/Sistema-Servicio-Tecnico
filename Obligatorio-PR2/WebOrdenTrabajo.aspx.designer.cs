@@ -102,7 +102,7 @@ namespace Obligatorio_PR2
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button clickAgrOrdenTrabajo;
+        protected global::System.Web.UI.WebControls.LinkButton clickAgrOrdenTrabajo;
 
         /// <summary>
         /// Control txtBuscarOrdenTrabajo.
@@ -120,7 +120,7 @@ namespace Obligatorio_PR2
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button BotonBuscar;
+        protected global::System.Web.UI.WebControls.LinkButton BotonBuscar;
 
         /// <summary>
         /// Control pagOrdenes.

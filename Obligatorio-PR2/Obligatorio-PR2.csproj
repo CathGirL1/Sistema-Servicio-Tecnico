@@ -154,6 +154,7 @@
     <Content Include="WebCliente.aspx" />
     <Content Include="WebComentarios.aspx" />
     <Content Include="WebOrdenTrabajo.aspx" />
+    <Content Include="WebReporteActividad.aspx" />
     <Content Include="WebTecnico.aspx" />
     <Content Include="Site.Master" />
     <Content Include="Web.config" />
@@ -243,6 +244,13 @@
     </Compile>
     <Compile Include="WebOrdenTrabajo.aspx.designer.cs">
       <DependentUpon>WebOrdenTrabajo.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebReporteActividad.aspx.cs">
+      <DependentUpon>WebReporteActividad.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebReporteActividad.aspx.designer.cs">
+      <DependentUpon>WebReporteActividad.aspx</DependentUpon>
     </Compile>
     <Compile Include="WebTecnico.aspx.cs">
       <DependentUpon>WebTecnico.aspx</DependentUpon>

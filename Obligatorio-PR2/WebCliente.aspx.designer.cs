@@ -183,7 +183,7 @@ namespace Obligatorio_PR2
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button clickAgrCliente;
+        protected global::System.Web.UI.WebControls.LinkButton clickAgrCliente;
 
         /// <summary>
         /// Control clickGrdCliente.
@@ -192,7 +192,7 @@ namespace Obligatorio_PR2
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button clickGrdCliente;
+        protected global::System.Web.UI.WebControls.LinkButton clickGrdCliente;
 
         /// <summary>
         /// Control txtBuscarCliente.
@@ -210,7 +210,7 @@ namespace Obligatorio_PR2
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button BotonBuscar;
+        protected global::System.Web.UI.WebControls.LinkButton BotonBuscar;
 
         /// <summary>
         /// Control pagClientes.

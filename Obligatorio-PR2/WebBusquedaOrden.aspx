@@ -2,9 +2,13 @@
       
 <asp:Content ID="Content5" ContentPlaceHolderID="MainContent" runat="server">
     &nbsp;
-    <h4>Escriba el numero de orden que quiera informarse... </h4>
-     <br />
-<asp:TextBox ID="txtBuscarOrdenTrabajo" runat="server"></asp:TextBox><asp:Button ID="BotonBuscar" runat="server" Text="Buscar Orden" OnClick="clickBuscarOrdenTrabajo" CausesValidation="false" style="margin-left: 8px;" />
+    <h4>Número de orden</h4>
+    <asp:TextBox ID="txtBuscarOrdenTrabajo" runat="server" placeholder="Ingrese número de orden:"></asp:TextBox><asp:LinkButton ID="BotonBuscar" runat="server" OnClick ="clickBuscarOrdenTrabajo" CausesValidation="false" CssClass="botonBuscar" style="margin-left: 8px;">
+         <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <circle cx="10.5" cy="10.5" r="7" stroke="white" stroke-width="2" fill="none"/>
+                <line x1="16" y1="16" x2="22" y2="22" stroke="white" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+    </asp:LinkButton>
    
     <asp:Panel ID="panelDetalles" runat="server" Visible="false" 
            Style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
@@ -51,11 +55,10 @@
 
 </asp:Panel>
 
-
         <asp:Label ID="mensajeErrorBusquedaOrden" runat="server" Visible="false" ForeColor="Red"></asp:Label>
 
     <style>
-        /* Estilo para el panel principal */
+        
     #panelDetalles {
         position: absolute;
         top: 50%;
@@ -69,9 +72,9 @@
         box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     }
 
-    /* Estilo para cada bloque de información */
+    
     .info-block {
-        background-color: #A9A9A9;  /* Gris medio claro oscuro */
+        background-color: #A9A9A9;  
         border: 1px solid #ddd;
         padding: 15px;
         margin-bottom: 20px;
@@ -79,17 +82,47 @@
         box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     }
 
-    /* Estilo para los títulos dentro de cada bloque */
+    
     .info-block h4 {
         margin-bottom: 10px;
         color: #333;
     }
 
-    /* Estilo para los párrafos dentro de cada bloque */
+  
     .info-block p {
         margin: 5px 0;
         color: #555;
     }
+
+
+     .botonBuscar {
+       display: inline-flex;
+       align-items: center;
+       justify-content: center;
+       width: 35px; 
+       height: 35px;
+       border-radius: 50%; 
+       background-color: black; 
+       cursor: pointer;
+       box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.164);
+       transition: all 0.3s ease;
+     }
+
+    .botonBuscar .icon {
+        width: 15px; 
+        height: 15px;
+        fill: white; 
+        transition: transform 0.3s ease, fill 0.3s ease; 
+    }
+
+    .botonBuscar:hover {
+       background-color: #333; 
+    }
+
+    .botonBuscar:hover .icon {
+       transform: scale(1.2); 
+    }
+
 
 
     </style>

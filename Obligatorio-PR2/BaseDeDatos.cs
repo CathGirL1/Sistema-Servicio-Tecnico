@@ -132,7 +132,7 @@ internal class BaseDeDatos
     {
         for (int x = 0; x < listaTecnicos.Count; x++)
         {
-            if (listaClientes[x].GetCi() == pCi)
+            if (listaTecnicos[x].GetCi() == pCi)
             {
                 listaTecnicos[x].nombre = pNombre;
                 listaTecnicos[x].apellido = pApellido;
